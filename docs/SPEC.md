@@ -30,6 +30,9 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Figma Make 로 만�
 
 - **공통**: 상단 고정 Navigation(홈·프로젝트 탭, GitHub·LinkedIn·블로그 아이콘, 이메일), 하단 Footer.
   - Navigation 은 스크롤 20px 를 넘으면 반투명 흰 배경 + 하단 구분선으로 바뀐다.
+- **코드 위치**: 라우팅 `navigation/` (`Route`, `PortfolioNavigator`, 해시 접근은 `BrowserLocation` expect/actual), 앱 뼈대 `app/` (`PortfolioApp`, `NavigationBar`, `Footer`), 화면 `screen/{home,projects}/`.
+  - `PortfolioNavigator.navigate` 는 해시만 바꾸고 `hashchange` 이벤트로 화면을 바꾼다. 브라우저 뒤로 가기·주소 직접 입력도 같은 흐름.
+  - 페이지 전체가 하나의 `verticalScroll` 이고 그 위에 Navigation 이 겹쳐 고정된다. 페이지 내용은 `SelectionContainer` 로 감싸 텍스트를 복사할 수 있다.
 - **HeroSection**: 화면 높이 가득, 이름·직무·강점 3개, 종이 질감 노이즈 배경, 아래쪽 바운스 화살표.
 - **FeaturedProjects**: 대표 프로젝트 카드(지표 4개, 하이라이트, 링크, 폰 목업 이미지 2장). "프로젝트 모두 보기" → `/projects`.
 - **ProjectsPage**: 프로젝트별 소개, 화면 목업 3장(가운데 장은 16px 아래로), 기술 태그, 담당 업무, 문제 해결 스토리.
@@ -89,6 +92,9 @@ Compose for Web 은 DOM 이 아니라 Canvas 에 그리므로 아래 사항을 �
 | 2026-11-02 | 폰트는 Pretendard 1.3.9 OTF 4종을 **KS X 1001 한글 2,350자 + 라틴·문장부호·화살표·도형·한글 자모**로 서브셋(굵기당 약 350KB)하고, JetBrains Mono **NL** TTF 3종과 함께 번들 (약 2MB). 라이선스는 `licenses/` | 전체 Pretendard 는 굵기당 1.5MB 이상. Pretendard **Std** 는 한글이 없는 라틴 전용판이라 쓸 수 없음. NL 은 합자(ligature) 없는 버전이라 `->` 등이 바뀌지 않음. 서브셋 밖 글자(예: `뷁`)는 표시되지 않으므로 문구 추가 시 확인 필요 |
 | 2026-11-02 | 폰트를 모두 받은 뒤에 화면을 그리고, 두 글꼴을 `FontFamily.Resolver.preload` 로 등록해 서로 없는 글리프를 대체 (모노의 한글 → Pretendard, Pretendard 의 `▸` → JetBrains Mono) | Canvas 는 브라우저 폰트 대체가 없어 늦게 온 폰트·없는 글리프가 빈 칸으로 보임. 디자인의 `monospace` 텍스트에 한글(`2,200장`, `블로그`)이 섞여 있음 |
 | 2026-11-02 | CSS `clamp(min, Nvw, max)` 는 `WindowSize.fluidSp`, `@media (max-width: 700px)` 는 `WindowSize.isCompact` 로 대체 | Compose 에는 CSS 단위가 없음 |
+| 2026-11-02 | 라우팅은 Navigation Compose 대신 직접 만든 해시 라우터(`PortfolioNavigator`) | 페이지가 2개뿐이고, 디자인과 같은 `/#/projects` 주소·브라우저 뒤로 가기를 단순하게 맞출 수 있음 |
+| 2026-11-02 | Navigation 의 `backdrop-filter: blur(12px)` 는 생략하고 92% 불투명 흰 배경만 적용 | Canvas 에서 뒤 콘텐츠 블러는 비용이 크고, 92% 불투명이라 차이가 거의 없음 |
+| 2026-11-02 | 창 폭 480px 미만에서는 Navigation 의 이메일 글자 대신 메일 아이콘을 보여준다 | 디자인은 좁은 화면에서 줄바꿈 없이 넘쳐 잘림 |
 | 2026-11-02 | 호버 효과는 `Modifier.webClickable` + `hoverColor` (150ms 색 전환), 물결 효과 없음 | 디자인의 `transition: 0.15s` 와 웹 링크 느낌 유지 |
 
 ---
