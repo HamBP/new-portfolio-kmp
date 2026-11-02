@@ -25,6 +25,9 @@ object PortfolioColors {
 
     val Border = Color(0xFFE5E7EB)
     val SurfaceAlt = Color(0xFFF9FAFB)
+
+    /** 홈 화면 회색 섹션 배경. 흰 섹션과 구분되도록 SurfaceAlt 보다 한 단계 진하다. */
+    val SectionBackground = Color(0xFFF3F4F6)
     val TagBackground = Color(0xFFF3F4F6)
 
     /** 불티 강조색 */

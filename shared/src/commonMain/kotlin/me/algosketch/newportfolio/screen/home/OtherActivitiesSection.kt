@@ -61,7 +61,7 @@ internal fun OtherActivitiesSection(
 ) {
     ContentContainer(
         modifier = modifier
-            .background(PortfolioColors.SurfaceAlt)
+            .background(PortfolioColors.SectionBackground)
             .padding(vertical = PortfolioDimens.SectionVerticalPadding),
     ) {
         SectionEyebrow("More", modifier = Modifier.padding(bottom = 8.dp))

@@ -23,6 +23,18 @@ data class Screenshot(
     val imageUrl: String? = null,
 )
 
+/**
+ * 대표 프로젝트의 주요 내용 한 줄. [link] 가 있으면 [text] 안의 [Link.text] 부분을 링크로 보여준다.
+ */
+@Immutable
+data class Highlight(
+    val text: String,
+    val link: Link? = null,
+) {
+    @Immutable
+    data class Link(val text: String, val url: String)
+}
+
 /** 홈의 대표 사이드 프로젝트 카드 */
 @Immutable
 data class FeaturedProject(
@@ -32,7 +44,7 @@ data class FeaturedProject(
     val description: String,
     val techs: List<String>,
     val metrics: List<Metric>,
-    val highlights: List<String>,
+    val highlights: List<Highlight>,
     val screenshots: List<Screenshot>,
     val githubUrl: String,
     val storeUrl: String?,

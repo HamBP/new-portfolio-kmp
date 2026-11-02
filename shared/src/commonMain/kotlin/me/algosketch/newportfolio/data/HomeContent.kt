@@ -4,25 +4,26 @@ import me.algosketch.newportfolio.designsystem.theme.PortfolioColors
 import me.algosketch.newportfolio.model.Contribution
 import me.algosketch.newportfolio.model.ContributionTag
 import me.algosketch.newportfolio.model.FeaturedProject
+import me.algosketch.newportfolio.model.Highlight
 import me.algosketch.newportfolio.model.Metric
 import me.algosketch.newportfolio.model.Screenshot
 import me.algosketch.newportfolio.model.Strength
 import me.algosketch.newportfolio.model.TimelineItem
 
-/** 홈 화면 문구. Figma Make 디자인의 내용을 그대로 옮겼다. */
+/** 홈 화면 문구. Figma Make 디자인의 내용을 옮기고, 자기소개(strengths)는 사용자가 준 문구로 바꿨다. */
 object HomeContent {
     val strengths = listOf(
         Strength(
+            title = "Android 앱의 배포와 운영을 경험한 개발자입니다",
+            description = "2020년부터 개발 동아리에 참여하여 현재까지 6개의 앱을 스토어에 배포했으며, 현재는 불티와 쏙 두 앱을 운영 및 업데이트하고 있습니다.",
+        ),
+        Strength(
             title = "다양한 직무 경험을 바탕으로 협업합니다",
-            description = "디자인, 프론트엔드, 백엔드를 모두 경험했습니다. 협업 과정에서 더 효율적으로 소통할 수 있습니다.",
+            description = "디자인, 프론트엔드, 백엔드를 모두 경험했습니다. 협업 과정에서 더 효율적으로 소통할 수 있으며, 담당 영역의 경계를 따지기보다 제가 해결할 수 있는 문제라면 먼저 확인하고 해결하려 합니다.",
         ),
         Strength(
-            title = "UI 디테일에 강점이 있습니다",
-            description = "간격의 미묘한 틀어짐이나 작은 색상의 차이를 잘 인지합니다. Figma의 Auto Layout이나 레이어 계층을 보고 디자이너의 의도를 파악해 구현합니다.",
-        ),
-        Strength(
-            title = "개발에 흥미가 많습니다",
-            description = "2020년부터 꾸준히 개발하고 있습니다. 매 프로젝트마다 새로운 기술이나 방법을 적용해 보며 학습해 왔습니다.",
+            title = "AI와 기본기를 함께 활용하는 개발을 지향합니다",
+            description = "AI를 적극적으로 활용해 생산성을 높이는 한편, 개발 원리를 이해하고 직접 구현하는 역량 역시 중요하게 생각합니다. 이를 위해 AI 중심으로 진행하는 프로젝트와 직접 코드를 작성하며 학습하는 프로젝트를 병행하고 있습니다.",
         ),
     )
 
@@ -34,15 +35,24 @@ object HomeContent {
             description = "인디 밴드를 위한 공연 주최 및 입장 서비스",
             techs = listOf("Compose", "MVVM", "Hilt", "Coroutine", "Firebase"),
             metrics = listOf(
-                Metric("1,700명", "누적 회원"),
-                Metric("2,200장", "티켓 판매"),
-                Metric("900만원", "거래액"),
+                Metric("1,900명", "누적 회원"),
+                Metric("2,500장", "티켓 판매"),
+                Metric("1,100만원", "거래액"),
                 Metric("33개", "Play 스토어 버전"),
             ),
             highlights = listOf(
-                "로그인, 푸시 알림, 동적 링크, 선물, 토스 페이먼츠 연동",
-                "스크롤 가능한 앱바를 포함한 UI 인터랙션 구현",
-                "ViewModel에서 예외 처리 및 Crashlytics 로그 수집 구조 설계",
+                Highlight("공연 탐색·예매·티켓·선물·로그인 등 Android 앱의 주요 기능 개발 및 유지보수"),
+                Highlight("누적 회원 수 1900명, 티켓 판매 수 2500장, 거래액 1100만 원 달성"),
+                Highlight("2024년 출시 이후 30회 이상 버전 업데이트하며 지속적으로 서비스 운영"),
+                Highlight("일부 화면을 WebView 기반으로 전환하고, WebView와 네이티브 간 통신 구현"),
+                Highlight("사용자 행동 분석을 위해 Mixpanel 이벤트와 프로퍼티를 설계하고 주요 화면 및 사용자 행동 로그를 수집"),
+                Highlight(
+                    text = "Navigation 이벤트 동시 발생에 대한 방어 로직 작성",
+                    link = Highlight.Link(
+                        text = "Navigation 이벤트 동시 발생에 대한 방어 로직",
+                        url = "https://algosketch.tistory.com/189",
+                    ),
+                ),
             ),
             screenshots = listOf(
                 Screenshot("불티 홈 화면"),
@@ -129,21 +139,14 @@ object HomeContent {
             title = "Compose Navigation 내부 코드 분석 및 구현",
             subtitle = "기술 블로그 작성 및 내부 로직을 기반으로 내비게이션 직접 구현",
             date = "2024.05",
-            url = Profile.BLOG_URL,
-            tag = ContributionTag.Blog,
-        ),
-        Contribution(
-            title = "ViewModel에서 예외를 처리하고 Crashlytics로 로그 수집하기",
-            subtitle = "앱 안정성을 위한 ViewModel 레이어 예외 처리 전략 정리",
-            date = "2024.02",
-            url = Profile.BLOG_URL,
+            url = "https://algosketch.tistory.com/190",
             tag = ContributionTag.Blog,
         ),
         Contribution(
             title = "Navigation과 이벤트의 충돌 문제 해결",
             subtitle = "Jetpack Navigation 2.x 버전의 뒤로가기 + 화면전환 충돌 분석 및 해결",
             date = "2024.01",
-            url = Profile.BLOG_URL,
+            url = "https://algosketch.tistory.com/189",
             tag = ContributionTag.Blog,
         ),
     )
@@ -153,21 +156,14 @@ object HomeContent {
             title = "[북마크] 일괄 삭제 기능 추가 #311",
             subtitle = "드로이드 나이츠",
             date = "2024.06",
-            url = Profile.GITHUB_URL,
+            url = "https://github.com/droidknights/DroidKnightsApp/pull/311",
             tag = ContributionTag.OpenSource,
         ),
         Contribution(
             title = "영구적으로 거부한 권한 확인 코드 오류 보고 #14",
             subtitle = "Manifest Android Interview 한국어",
             date = "2025.08",
-            url = Profile.GITHUB_URL,
-            tag = ContributionTag.TechBook,
-        ),
-        Contribution(
-            title = "SnapshopFlowExample.kt 코드 오류 보고 (436p)",
-            subtitle = "Manifest Android Interview 한국어",
-            date = "2025.08",
-            url = Profile.GITHUB_URL,
+            url = "https://github.com/skydoves/manifest-android-interview/issues/14",
             tag = ContributionTag.TechBook,
         ),
     )
