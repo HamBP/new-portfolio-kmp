@@ -15,6 +15,7 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Figma Make 로 만�
 | R1 | Figma Make 의 포트폴리오를 Kotlin/Wasm 으로 구현한다. | `shared/src/commonMain`, `webApp` |
 | R2 | 요청 내용을 기능·세부 구현사항으로 정리한 md 파일을 관리하고, 결정사항이 생길 때마다 갱신한다. 프롬프트는 전용 md 로 관리한다. | `docs/SPEC.md`, `docs/PROMPTS.md`, `CLAUDE.md` |
 | R3 | 작업은 자동으로 커밋한다. 커밋은 작은 단위로 나누고, 문서·스타일·리팩토링·기능 수정·기능 추가를 서로 다른 커밋으로 분리한다. | `CLAUDE.md`(커밋 규칙) |
+| R5 | Figma 디자인을 가져온다: 디자인 시스템·테마 → 내비게이션 → 홈 → 프로젝트 화면 순서. Boolti 와 비슷한 싱글 모듈 구조, MVI 적용 (이슈 #1) | `designsystem/`, `navigation/`, `app/`, `screen/` (§2.1) |
 | R4 | 작업 단위마다 브랜치와 PR 을 만든다. 기본 작업 브랜치는 `develop`, 작업 브랜치는 `feature/{번호}-{작업내용}`. 병합 전에 "머지할까요?" 라고 묻는다. 연속된 비슷한 요청은 기존 브랜치·PR 에서 이어서 작업한다. | `CLAUDE.md`(브랜치·PR 규칙) |
 
 ---
@@ -36,6 +37,8 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Figma Make 로 만�
 - **HeroSection**: 화면 높이 가득, 이름·직무·강점 3개, 종이 질감 노이즈 배경, 아래쪽 바운스 화살표.
 - **FeaturedProjects**: 대표 프로젝트 카드(지표 4개, 하이라이트, 링크, 폰 목업 이미지 2장). "프로젝트 모두 보기" → `/projects`.
 - **ProjectsPage**: 프로젝트별 소개, 화면 목업 3장(가운데 장은 16px 아래로), 기술 태그, 담당 업무, 문제 해결 스토리.
+  - 목업 이미지가 없는 프로젝트(Gradle Convention Plugin)는 목업 줄을, 스토어 주소가 없는 프로젝트는 "Play 스토어" 링크를 그리지 않는다.
+  - 문구는 `data/ProjectsContent.kt`. 프로젝트마다 장식용 `accent`, 글자용 `textAccent`(흰 배경 대비 4.5:1 이상), 스토리 선 `borderAccent` 색을 가진다.
 
 ### 2.1 코드 구조 (이슈 #1)
 
@@ -124,6 +127,7 @@ Compose for Web 은 DOM 이 아니라 Canvas 에 그리므로 아래 사항을 �
 ---
 
 ## 6. 향후 과제
-- GitHub 원격 저장소 연결 (PR 규칙 적용 전제).
-- 프로젝트 화면 목업 이미지 채우기 (디자인에서는 빈 자리 표시).
+- 프로젝트 화면 목업 이미지 채우기 (디자인에서는 빈 자리 표시). `Screenshot.imageUrl` 을 채우고 이미지 표시를 구현해야 한다.
+- LinkedIn 주소(`Profile.LINKEDIN_URL`)와 프로젝트별 GitHub·스토어 주소가 디자인의 임시 값이다.
+- `index.html` 의 제목·meta·OG 태그, 로딩 표시 정리 (§4).
 - 배포 대상 결정 (GitHub Pages 등).
