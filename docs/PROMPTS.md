@@ -108,3 +108,42 @@ PR #7 을 `develop` 에 병합하고 `develop` 에서 `/deploy` 로 배포한다
 > 이제부터의 작업도 하나의 브랜치에서 작업해줘.
 
 `CLAUDE.md` 브랜치 규칙을 갱신: 병합 전 작업 브랜치가 있으면 다른 부분을 수정하는 요청도 그 브랜치·PR 에 이어서 커밋한다. 이번 작업 묶음은 `feature/8-portfolio-update`.
+
+## #16 (2026-11-03) 프로젝트 탭 머리말
+
+> 프로젝트 탭을 수정할 거야. 우선 "매 프로젝트마다 새로운 기술을 도입하고..." 이 부분 제거해줘.
+
+## #17 (2026-11-03) 프로젝트 상세 소개 제거
+
+> 불티에서 인디 밴드가 공연을 직접 주최하고 팬이 티켓을 구매할 수 있는 Android 앱. 결제부터 입장 QR까지 전체 플로우를 담당했습니다. 이 부분 제거해줘. 다른 프로젝트도 같은 위치에 있는 내용 제거해줘.
+
+## #18 (2026-11-03) 불티 담당 업무
+
+> 불티의 담당 업무 [Image #4] 이 사진처럼 변경
+
+이미지 내용: 홈 불티 하이라이트(#11)와 같은 6줄. 마지막 줄의 "Navigation 이벤트 동시 발생에 대한 방어 로직" 은 링크.
+
+## #19 (2026-11-03) 쏙 담당 업무
+
+> 쏙의 담당 업무 [Image #5] 이것으로 변경
+
+이미지 내용:
+- 탐색·페이지네이션·정렬·홈 인터랙션 등 주요 기능 개발
+- Firebase App Distribution·Fastlane·GitHub Actions 기반 CI/CD 및 Play Store 배포 자동화
+- Firebase Remote Config 기반 A/B Testing 및 Analytics 로그 설계
+
+## #20 (2026-11-03) Catchy Tape 담당 업무 추가
+
+> catchy tape 의 담당 업무 리스트에 - 6주간 약 90개의 PR과 700개의 리뷰 코멘트 작성 추가
+
+## #21 (2026-11-03) 불티 링크
+
+> 불티 스토어 링크 https://play.google.com/store/apps/details?id=com.nexters.boolti&hl=ko , 깃허브 링크 https://github.com/Nexters/Boolti
+
+## #22 (2026-11-03) Gradle Convention Plugin 제거
+
+> Gradle Convention Plugin 프로젝트 제거
+
+## #23 (2026-11-03) 쏙 링크
+
+> 쏙 스토어 링크 https://play.google.com/store/apps/details?id=com.fairyband.soak&hl=ko 깃허브 링크 https://github.com/fairy-band/NewsLetter-Android
