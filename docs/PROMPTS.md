@@ -96,3 +96,9 @@ PR #6 을 `develop` 에 병합한다.
 ## #13 (2026-11-03) 그 외 활동 링크
 
 > 그 외 활동의 링크를 변경해줘. https://algosketch.tistory.com/190 https://algosketch.tistory.com/189 https://github.com/skydoves/manifest-android-interview/issues/14 https://github.com/droidknights/DroidKnightsApp/pull/311 매핑은 알아서 하고, 내가 전달하지 않은 링크인 ViewModel에서의 예외처리와 SnapshotFlow 관련 내용은 제거해줘.
+
+## #14 (2026-11-03) PR 병합과 배포
+
+> 응 머지하고 배포해줘
+
+PR #7 을 `develop` 에 병합하고 `develop` 에서 `/deploy` 로 배포한다.
