@@ -8,6 +8,9 @@ import me.algosketch.newportfolio.model.Screenshot
 import newportfolio.shared.generated.resources.Res
 import newportfolio.shared.generated.resources.boolti_payment
 import newportfolio.shared.generated.resources.boolti_ticket
+import newportfolio.shared.generated.resources.soak_bookmark
+import newportfolio.shared.generated.resources.soak_explore
+import newportfolio.shared.generated.resources.soak_home
 
 /** 프로젝트 화면 문구. Figma Make 디자인의 내용을 그대로 옮겼다. */
 object ProjectsContent {
@@ -67,9 +70,9 @@ object ProjectsContent {
                 Highlight("Firebase Remote Config 기반 A/B Testing 및 Analytics 로그 설계"),
             ),
             screenshots = listOf(
-                Screenshot("쏙 홈 화면"),
-                Screenshot("쏙 뉴스레터 상세"),
-                Screenshot("쏙 큐레이팅 화면"),
+                Screenshot("쏙 추천 화면", Res.drawable.soak_home, Screenshot.PHONE_ASPECT_RATIO),
+                Screenshot("쏙 탐색 화면", Res.drawable.soak_explore, Screenshot.PHONE_ASPECT_RATIO),
+                Screenshot("쏙 보관함 화면", Res.drawable.soak_bookmark, Screenshot.PHONE_ASPECT_RATIO),
             ),
             achievements = listOf(
                 Achievement(

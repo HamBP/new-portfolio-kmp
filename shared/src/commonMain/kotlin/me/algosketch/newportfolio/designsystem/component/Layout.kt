@@ -33,6 +33,3 @@ fun ContentContainer(
         )
     }
 }
-
-/** 화면 목업 비율. 스토어 스크린샷(1080×1920)과 같은 9:16 */
-const val ScreenshotAspectRatio = 9f / 16f

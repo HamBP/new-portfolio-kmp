@@ -48,7 +48,6 @@ import androidx.compose.ui.unit.sp
 import me.algosketch.newportfolio.designsystem.component.ContentContainer
 import me.algosketch.newportfolio.designsystem.component.HighlightText
 import me.algosketch.newportfolio.designsystem.component.IconTextLink
-import me.algosketch.newportfolio.designsystem.component.ScreenshotAspectRatio
 import me.algosketch.newportfolio.designsystem.component.SectionEyebrow
 import me.algosketch.newportfolio.designsystem.component.SectionTitle
 import me.algosketch.newportfolio.designsystem.component.TechTag
@@ -322,7 +321,7 @@ private fun PhoneMockup(
     modifier: Modifier = Modifier,
 ) {
     val frame = modifier
-        .aspectRatio(ScreenshotAspectRatio)
+        .aspectRatio(screenshot.aspectRatio)
         .dropShadow(PhoneShape, Shadow(radius = 20.dp, color = Color.Black.copy(alpha = 0.08f), offset = DpOffset(0.dp, 4.dp)))
         .clip(PhoneShape)
         .background(PortfolioColors.SurfaceAlt)

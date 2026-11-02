@@ -43,7 +43,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import me.algosketch.newportfolio.designsystem.component.ContentContainer
 import me.algosketch.newportfolio.designsystem.component.HighlightText
 import me.algosketch.newportfolio.designsystem.component.IconTextLink
-import me.algosketch.newportfolio.designsystem.component.ScreenshotAspectRatio
 import me.algosketch.newportfolio.designsystem.component.SectionEyebrow
 import me.algosketch.newportfolio.designsystem.component.TechTag
 import me.algosketch.newportfolio.designsystem.component.TechTagSize
@@ -255,7 +254,7 @@ private fun ScreenMockup(
     modifier: Modifier = Modifier,
 ) {
     val frame = modifier
-        .aspectRatio(ScreenshotAspectRatio)
+        .aspectRatio(screenshot.aspectRatio)
         .dropShadow(ScreenShape, Shadow(radius = 20.dp, color = Color.Black.copy(alpha = 0.07f), offset = DpOffset(0.dp, 4.dp)))
         .clip(ScreenShape)
         .background(PortfolioColors.SurfaceAlt)

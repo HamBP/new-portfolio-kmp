@@ -17,12 +17,23 @@ data class Metric(
     val label: String,
 )
 
-/** 화면 목업. [image] 가 없으면 [description] 을 적은 빈 자리를 보여준다. 이미지는 9:16 스토어 스크린샷. */
+/**
+ * 화면 목업. [image] 가 없으면 [description] 을 적은 빈 자리를 보여준다.
+ * [aspectRatio] 는 가로/세로 비율로, 이미지 비율과 맞춰야 잘리지 않는다. 기본값은 스토어 스크린샷(1080×1920)의 9:16.
+ */
 @Immutable
 data class Screenshot(
     val description: String,
     val image: DrawableResource? = null,
-)
+    val aspectRatio: Float = STORE_ASPECT_RATIO,
+) {
+    companion object {
+        const val STORE_ASPECT_RATIO = 9f / 16f
+
+        /** 휴대폰 화면 캡처(375×812) 비율 */
+        const val PHONE_ASPECT_RATIO = 375f / 812f
+    }
+}
 
 /** 홈의 대표 사이드 프로젝트 카드 */
 @Immutable
