@@ -58,8 +58,8 @@ object HomeContent {
                 Screenshot("불티 홈 화면"),
                 Screenshot("불티 티켓 화면"),
             ),
-            githubUrl = "https://github.com/HamBP",
-            storeUrl = "https://play.google.com",
+            githubUrl = "https://github.com/Nexters/Boolti",
+            storeUrl = "https://play.google.com/store/apps/details?id=com.nexters.boolti&hl=ko",
             accent = PortfolioColors.BooltiAccent,
         ),
     )
