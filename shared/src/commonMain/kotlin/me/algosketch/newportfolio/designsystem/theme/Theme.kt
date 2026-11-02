@@ -41,8 +41,8 @@ private val SelectionColors = TextSelectionColors(
 /**
  * 포트폴리오 테마. 번들 폰트를 다 받은 뒤에 [content] 를 그린다.
  *
- * Pretendard 를 [androidx.compose.ui.text.font.FontFamily.Resolver.preload] 로 미리 등록해
- * JetBrains Mono 에 없는 한글 글리프가 Pretendard 로 대체되게 한다.
+ * 두 글꼴을 [androidx.compose.ui.text.font.FontFamily.Resolver.preload] 로 미리 등록해
+ * 서로 없는 글리프를 대체하게 한다. (모노 글꼴의 한글 → Pretendard, Pretendard 의 `▸` → JetBrains Mono)
  */
 @Composable
 fun PortfolioTheme(content: @Composable () -> Unit) {
@@ -53,6 +53,7 @@ fun PortfolioTheme(content: @Composable () -> Unit) {
     LaunchedEffect(fonts) {
         if (fonts != null) {
             resolver.preload(fonts.sans)
+            resolver.preload(fonts.mono)
             fallbackRegistered = true
         }
     }
