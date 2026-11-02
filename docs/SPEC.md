@@ -140,6 +140,5 @@ Compose for Web 은 DOM 이 아니라 Canvas 에 그리므로 아래 사항을 �
 ---
 
 ## 6. 향후 과제
-- 불티 프로젝트 탭의 세 번째 목업 이미지("불티 공연 목록")가 아직 빈 자리다. 받은 이미지 두 장(#6, #7)이 같은 파일이었다.
 - LinkedIn 주소(`Profile.LINKEDIN_URL`)와 Catchy Tape 의 GitHub 주소가 디자인의 임시 값이다.
 - `index.html` 의 제목·meta·OG 태그, 로딩 표시 정리 (§4).
