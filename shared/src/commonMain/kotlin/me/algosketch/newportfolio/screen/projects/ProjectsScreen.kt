@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import me.algosketch.newportfolio.designsystem.component.ContentContainer
+import me.algosketch.newportfolio.designsystem.component.HighlightText
 import me.algosketch.newportfolio.designsystem.component.IconTextLink
 import me.algosketch.newportfolio.designsystem.component.SectionEyebrow
 import me.algosketch.newportfolio.designsystem.component.TechTag
@@ -184,7 +185,7 @@ private fun ProjectArticle(
 
         Column(modifier = Modifier.padding(bottom = 52.dp)) {
             SectionLabel("담당 업무")
-            Responsibilities(project)
+            Responsibilities(project, onAction)
         }
 
         Column {
@@ -296,7 +297,10 @@ private fun ScreenMockup(
 }
 
 @Composable
-private fun Responsibilities(project: Project) {
+private fun Responsibilities(
+    project: Project,
+    onAction: (ProjectsAction) -> Unit,
+) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         project.responsibilities.forEach { item ->
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -305,9 +309,10 @@ private fun Responsibilities(project: Project) {
                     modifier = Modifier.padding(top = 2.dp),
                     style = PortfolioTextStyle.mono(size = 13.sp, color = project.textAccent, lineHeight = 1.7f),
                 )
-                Text(
-                    text = item,
+                HighlightText(
+                    highlight = item,
                     style = PortfolioTextStyle.sans(size = 15.sp, color = PortfolioColors.Body, lineHeight = 1.7f),
+                    onLinkClick = { onAction(ProjectsAction.ClickLink(it)) },
                 )
             }
         }

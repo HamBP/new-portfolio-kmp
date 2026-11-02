@@ -25,7 +25,7 @@ data class Project(
     val tag: String,
     val description: String,
     val techs: List<String>,
-    val responsibilities: List<String>,
+    val responsibilities: List<Highlight>,
     val screenshots: List<Screenshot>,
     val achievements: List<Achievement>,
     val githubUrl: String,

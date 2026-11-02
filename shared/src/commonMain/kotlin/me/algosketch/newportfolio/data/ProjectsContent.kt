@@ -2,6 +2,7 @@ package me.algosketch.newportfolio.data
 
 import me.algosketch.newportfolio.designsystem.theme.PortfolioColors
 import me.algosketch.newportfolio.model.Achievement
+import me.algosketch.newportfolio.model.Highlight
 import me.algosketch.newportfolio.model.Project
 import me.algosketch.newportfolio.model.Screenshot
 
@@ -16,9 +17,18 @@ object ProjectsContent {
             description = "인디 밴드를 위한 공연 주최 및 입장 서비스",
             techs = listOf("Compose", "MVVM", "Hilt", "Coroutine", "Firebase"),
             responsibilities = listOf(
-                "로그인, 푸시 알림, 동적 링크, 선물, 토스 페이먼츠 연동 담당",
-                "스크롤 가능한 앱바를 포함한 UI 인터랙션 구현",
-                "Navigation 이벤트 동시 발생에 대한 방어 로직 작성",
+                Highlight("공연 탐색·예매·티켓·선물·로그인 등 Android 앱의 주요 기능 개발 및 유지보수"),
+                Highlight("누적 회원 수 1900명, 티켓 판매 수 2500장, 거래액 1100만 원 달성"),
+                Highlight("2024년 출시 이후 30회 이상 버전 업데이트하며 지속적으로 서비스 운영"),
+                Highlight("일부 화면을 WebView 기반으로 전환하고, WebView와 네이티브 간 통신 구현"),
+                Highlight("사용자 행동 분석을 위해 Mixpanel 이벤트와 프로퍼티를 설계하고 주요 화면 및 사용자 행동 로그를 수집"),
+                Highlight(
+                    text = "Navigation 이벤트 동시 발생에 대한 방어 로직 작성",
+                    link = Highlight.Link(
+                        text = "Navigation 이벤트 동시 발생에 대한 방어 로직",
+                        url = "https://algosketch.tistory.com/189",
+                    ),
+                ),
             ),
             screenshots = listOf(
                 Screenshot("불티 홈 화면"),
@@ -49,9 +59,9 @@ object ProjectsContent {
             description = "AI가 요약하고 큐레이팅해 주는 데일리 뉴스레터 서비스",
             techs = listOf("Koin", "CI/CD", "Fastlane", "Firebase A/B Test"),
             responsibilities = listOf(
-                "홈 카드 인터랙션, CI/CD, GA 로깅 담당",
-                "Firebase A/B Testing 적용",
-                "AI 및 상호 코드 리뷰",
+                Highlight("탐색·페이지네이션·정렬·홈 인터랙션 등 주요 기능 개발"),
+                Highlight("Firebase App Distribution·Fastlane·GitHub Actions 기반 CI/CD 및 Play Store 배포 자동화"),
+                Highlight("Firebase Remote Config 기반 A/B Testing 및 Analytics 로그 설계"),
             ),
             screenshots = listOf(
                 Screenshot("쏙 홈 화면"),
@@ -78,10 +88,11 @@ object ProjectsContent {
             description = "노래 공유 및 음악 스트리밍 서비스",
             techs = listOf("View", "MVVM", "Hilt", "Coroutine", "Media3", "ExoPlayer", "CI/CD", "Kotest"),
             responsibilities = listOf(
-                "Kotest와 GitHub Actions를 이용한 CI/CD 구축",
-                "Light/Dark theme 대응 및 디자인 시스템 적용",
-                "멀티 모듈의 gradle 중복 코드 제거를 위해 gradle 플러그인 개발",
-                "HLS 구조를 파악하여 ExoPlayer의 오작동 문제 해결",
+                Highlight("Kotest와 GitHub Actions를 이용한 CI/CD 구축"),
+                Highlight("Light/Dark theme 대응 및 디자인 시스템 적용"),
+                Highlight("멀티 모듈의 gradle 중복 코드 제거를 위해 gradle 플러그인 개발"),
+                Highlight("HLS 구조를 파악하여 ExoPlayer의 오작동 문제 해결"),
+                Highlight("6주간 약 90개의 PR과 700개의 리뷰 코멘트 작성"),
             ),
             screenshots = listOf(
                 Screenshot("Catchy Tape 홈"),
@@ -108,9 +119,9 @@ object ProjectsContent {
             description = "멀티 모듈 프로젝트의 Gradle 중복 설정을 제거하는 컨벤션 플러그인",
             techs = listOf("Gradle", "Kotlin DSL", "Android"),
             responsibilities = listOf(
-                "공통 Android 설정을 플러그인으로 추출하여 단일 지점에서 관리",
-                "각 모듈은 필요한 플러그인만 선언해 설정 의도를 명확하게 표현",
-                "신규 모듈 추가 시 보일러플레이트 없이 즉시 사용 가능한 구조 설계",
+                Highlight("공통 Android 설정을 플러그인으로 추출하여 단일 지점에서 관리"),
+                Highlight("각 모듈은 필요한 플러그인만 선언해 설정 의도를 명확하게 표현"),
+                Highlight("신규 모듈 추가 시 보일러플레이트 없이 즉시 사용 가능한 구조 설계"),
             ),
             screenshots = emptyList(),
             achievements = listOf(
