@@ -27,7 +27,7 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Figma Make 로 만�
 | 경로 | 페이지 | 구성 |
 |---|---|---|
 | `/#/` | 홈 | HeroSection → FeaturedProjects → CareerTimeline → OtherActivities |
-| `/#/projects` | 프로젝트 | 페이지 헤더 + 프로젝트 목록(불티, 쏙, Catchy Tape, Gradle Convention Plugin) |
+| `/#/projects` | 프로젝트 | 페이지 헤더 + 프로젝트 목록(불티, 쏙, Catchy Tape) |
 
 - **공통**: 상단 고정 Navigation(홈·프로젝트 탭, GitHub·LinkedIn·블로그 아이콘, 이메일), 하단 Footer.
   - Navigation 은 스크롤 20px 를 넘으면 반투명 흰 배경 + 하단 구분선으로 바뀐다.
@@ -35,9 +35,10 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Figma Make 로 만�
   - `PortfolioNavigator.navigate` 는 해시만 바꾸고 `hashchange` 이벤트로 화면을 바꾼다. 브라우저 뒤로 가기·주소 직접 입력도 같은 흐름.
   - 페이지 전체가 하나의 `verticalScroll` 이고 그 위에 Navigation 이 겹쳐 고정된다. 페이지 내용은 `SelectionContainer` 로 감싸 텍스트를 복사할 수 있다.
 - **HeroSection**: 화면 높이 가득, 이름·직무·강점(자기소개) 3개 (문구는 `data/HomeContent.kt`, 사용자 제공 문구), 종이 질감 노이즈 배경, 아래쪽 바운스 화살표.
-- **FeaturedProjects**: 대표 프로젝트 카드(지표 4개, 하이라이트, 링크, 폰 목업 이미지 2장). 하이라이트는 `Highlight` 모델로, 문장 일부를 링크(제목색·굵게·밑줄)로 둘 수 있다. "프로젝트 모두 보기" → `/projects`.
-- **ProjectsPage**: 프로젝트별 소개, 화면 목업 3장(가운데 장은 16px 아래로), 기술 태그, 담당 업무, 문제 해결 스토리.
-  - 목업 이미지가 없는 프로젝트(Gradle Convention Plugin)는 목업 줄을, 스토어 주소가 없는 프로젝트는 "Play 스토어" 링크를 그리지 않는다.
+- **FeaturedProjects**: 대표 프로젝트 카드(지표 4개, 하이라이트, 링크, 폰 목업 이미지 2장: 불티 티켓·예매 화면). 하이라이트는 `Highlight` 모델로, 문장 일부를 링크(제목색·굵게·밑줄)로 둘 수 있다. "프로젝트 모두 보기" → `/projects`.
+- **ProjectsPage**: 프로젝트별 한 줄 소개, 화면 목업 3장(가운데 장은 16px 아래로), 기술 태그, 담당 업무(`Highlight`, 일부 링크 가능), 문제 해결 스토리. 머리말은 eyebrow 와 "프로젝트" 제목만 둔다.
+  - 목업 이미지는 `composeResources/drawable` 의 WebP (`Screenshot.image`). 목업 비율은 `Screenshot.aspectRatio` 로 이미지마다 맞춘다 (불티 스토어 이미지 9:16, 쏙 375×812, Catchy Tape 360×760). 이미지가 없으면 점선 아이콘과 설명을 그린다.
+  - 목업 이미지가 없는 프로젝트는 목업 줄을, 스토어 주소가 없는 프로젝트(Catchy Tape)는 "Play 스토어" 링크를 그리지 않는다.
   - 문구는 `data/ProjectsContent.kt`. 프로젝트마다 장식용 `accent`, 글자용 `textAccent`(흰 배경 대비 4.5:1 이상), 스토리 선 `borderAccent` 색을 가진다.
 
 ### 2.1 코드 구조 (이슈 #1)
@@ -129,10 +130,15 @@ Compose for Web 은 DOM 이 아니라 Canvas 에 그리므로 아래 사항을 �
 | 2026-11-03 | `webClickable` 의 손가락 커서에 `overrideDescendants = true` | 페이지가 `SelectionContainer` 안이라 링크·버튼 안 텍스트가 I-beam 커서를 내서 손가락 커서를 덮었음 |
 | 2026-11-03 | 자기소개·불티 하이라이트·지표를 사용자 제공 문구로 교체 (지표: 회원 1,900명, 티켓 2,500장, 거래액 1,100만원. 버전 지표 33개는 유지) | 사용자 요청 (프롬프트 #9, #11) |
 | 2026-11-03 | 그 외 활동 링크: 블로그 190 → Compose Navigation 내부 분석, 189 → Navigation과 이벤트 충돌, DroidKnights PR #311, Manifest Android Interview 이슈 #14. 링크가 없는 ViewModel 예외 처리 글·SnapshotFlow 오류 보고는 제거. 불티 하이라이트의 "Navigation 이벤트 동시 발생에 대한 방어 로직" 도 189 글로 연결 | 사용자 요청 (프롬프트 #13). 글 제목으로 매핑 |
+| 2026-11-03 | 프로젝트 탭: 머리말 두 번째 문장과 프로젝트별 상세 소개 문단(`longDescription`) 제거, Gradle Convention Plugin 프로젝트 제거 | 사용자 요청 (프롬프트 #16, #17, #22) |
+| 2026-11-03 | 프로젝트 담당 업무를 `Highlight` 로 바꾸고 불티·쏙은 사용자 제공 문구로 교체, Catchy Tape 에 "6주간 약 90개의 PR과 700개의 리뷰 코멘트 작성" 추가. `Highlight`·`HighlightText` 는 `model/`·`designsystem/component/` 로 옮겨 홈과 공유 | 사용자 요청 (프롬프트 #18~#20). 불티 담당 업무가 홈 하이라이트와 같은 문구라 링크 표시 방식을 하나로 맞춤 |
+| 2026-11-03 | 불티·쏙의 GitHub·Play 스토어 링크를 실제 주소로 (홈 불티 카드 포함) | 사용자 요청 (프롬프트 #21, #23) |
+| 2026-11-03 | 프로젝트 탭 머리말 문장을 모두 제거 | 사용자 요청 (프롬프트 #26) |
+| 2026-11-03 | Navigation 배경·구분선 애니메이션을 `Color.Transparent` 대신 같은 색의 알파 0 에서 시작 | `Color.Transparent` 는 투명한 검정이라 흰색과 보간하는 중간 프레임이 어두워져 스크롤 시 검게 깜빡였음 (프롬프트 #27). 헤드리스 Chrome 측정: 애니메이션 중 헤더 최저 밝기 172.9 → 243.9 |
+| 2026-11-03 | 목업에 실제 스크린샷을 넣고, 목업 비율을 9:19 고정에서 이미지별 `aspectRatio` 로 변경 (빈 자리 기본값 9:16). 스토어 이미지는 720px, 캡처는 원본 크기 WebP 로 번들 | 사용자 요청 (프롬프트 #28~#30). 받은 이미지 비율이 셋 다 달라 고정 비율이면 위아래가 잘림. PNG 원본 약 1.6MB → WebP 약 160KB |
 
 ---
 
 ## 6. 향후 과제
-- 프로젝트 화면 목업 이미지 채우기 (디자인에서는 빈 자리 표시). `Screenshot.imageUrl` 을 채우고 이미지 표시를 구현해야 한다.
-- LinkedIn 주소(`Profile.LINKEDIN_URL`)와 프로젝트별 GitHub·스토어 주소가 디자인의 임시 값이다.
+- LinkedIn 주소(`Profile.LINKEDIN_URL`)와 Catchy Tape 의 GitHub 주소가 디자인의 임시 값이다.
 - `index.html` 의 제목·meta·OG 태그, 로딩 표시 정리 (§4).

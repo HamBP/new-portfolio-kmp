@@ -9,6 +9,9 @@ import me.algosketch.newportfolio.model.Metric
 import me.algosketch.newportfolio.model.Screenshot
 import me.algosketch.newportfolio.model.Strength
 import me.algosketch.newportfolio.model.TimelineItem
+import newportfolio.shared.generated.resources.Res
+import newportfolio.shared.generated.resources.boolti_payment
+import newportfolio.shared.generated.resources.boolti_ticket
 
 /** 홈 화면 문구. Figma Make 디자인의 내용을 옮기고, 자기소개(strengths)는 사용자가 준 문구로 바꿨다. */
 object HomeContent {
@@ -55,11 +58,11 @@ object HomeContent {
                 ),
             ),
             screenshots = listOf(
-                Screenshot("불티 홈 화면"),
-                Screenshot("불티 티켓 화면"),
+                Screenshot("불티 티켓 화면", Res.drawable.boolti_ticket),
+                Screenshot("불티 예매 화면", Res.drawable.boolti_payment),
             ),
-            githubUrl = "https://github.com/HamBP",
-            storeUrl = "https://play.google.com",
+            githubUrl = "https://github.com/Nexters/Boolti",
+            storeUrl = "https://play.google.com/store/apps/details?id=com.nexters.boolti&hl=ko",
             accent = PortfolioColors.BooltiAccent,
         ),
     )

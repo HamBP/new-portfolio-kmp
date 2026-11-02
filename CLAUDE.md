@@ -13,8 +13,8 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Kotlin/Wasm + Compo
 ## 브랜치·PR 규칙 (필수)
 - 기본 작업 브랜치는 `develop`. `master` 에 직접 커밋하지 않는다.
 - 적당한 작업 단위(섹션 하나, 페이지 하나 등)마다 `develop` 에서 작업 브랜치를 만든다.
-- **연속된 요청이 같거나 비슷한 부분을 수정하면 새 브랜치를 만들지 않는다.** 아직 병합되지 않은 기존 작업 브랜치에 커밋을 추가하고, 같은 PR 의 제목·본문을 갱신한다. (예: Hero 섹션 수정 요청이 연달아 오면 하나의 브랜치·PR 에서 진행)
-  - 기존 PR 이 이미 병합됐거나, 다른 부분을 수정하는 요청이면 새 브랜치를 만든다.
+- **연속된 요청은 하나의 브랜치·PR 에서 진행한다.** 아직 병합되지 않은 작업 브랜치가 있으면, 다른 부분을 수정하는 요청이라도 새 브랜치를 만들지 않고 그 브랜치에 커밋을 추가하며 같은 PR 의 제목·본문을 갱신한다. (사용자 지침, 프롬프트 #9·#15)
+  - 그 PR 이 병합된 뒤 오는 요청부터 새 브랜치 하나를 만들어 같은 방식으로 이어간다.
   - 브랜치 번호를 정하기 직전에 이슈·PR 번호를 다시 확인한다 (사용자가 그사이 이슈를 만들 수 있음).
 - 브랜치 이름: `feature/{번호}-{작업내용}` (작업내용은 영어 kebab-case). 예: `feature/3-hero-section`
   - 번호는 이 브랜치로 만들 GitHub PR 번호와 맞춘다 (이슈·PR 공용 번호의 다음 값: `gh pr list --state all --limit 1`, `gh issue list --state all --limit 1` 중 큰 값 + 1).
@@ -41,5 +41,6 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Kotlin/Wasm + Compo
 - 실행: `./gradlew :webApp:wasmJsBrowserDevelopmentRun` (JS: `./gradlew :webApp:jsBrowserDevelopmentRun`)
 - 테스트: `./gradlew :shared:wasmJsTest` (JS: `./gradlew :shared:jsTest`)
 - 배포 빌드: `./gradlew :webApp:wasmJsBrowserDistribution`
+- **구현 후 실제 앱 확인 (필수)**: 단위 테스트·빌드에 더해, 배포 빌드를 로컬 서버(`python -m http.server`)로 띄우고 헤드리스 Chrome(Playwright)으로 바뀐 화면을 열어 스크린샷과 콘솔 오류(`pageerror`·`console.error`)를 확인한 뒤 보고한다. (프롬프트 #25)
 - 배포: `/deploy` 스킬 (`.claude/skills/deploy`). 빌드 결과물을 HamBP/portfolio-page `main` 에 올린다 → https://hambp.github.io/portfolio-page/
 - Canvas 렌더링이라 브라우저 폰트로 대체되지 않는다. 한글·모노 폰트는 반드시 `composeResources/font` 에 번들한다 (`docs/SPEC.md` §4).

@@ -2,6 +2,7 @@ package me.algosketch.newportfolio.model
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
+import org.jetbrains.compose.resources.DrawableResource
 
 /** 히어로 섹션의 강점 한 줄 */
 @Immutable
@@ -16,23 +17,22 @@ data class Metric(
     val label: String,
 )
 
-/** 화면 목업 자리. [imageUrl] 이 없으면 [description] 을 적은 빈 자리를 보여준다. */
+/**
+ * 화면 목업. [image] 가 없으면 [description] 을 적은 빈 자리를 보여준다.
+ * [aspectRatio] 는 가로/세로 비율로, 이미지 비율과 맞춰야 잘리지 않는다. 기본값은 스토어 스크린샷(1080×1920)의 9:16.
+ */
 @Immutable
 data class Screenshot(
     val description: String,
-    val imageUrl: String? = null,
-)
-
-/**
- * 대표 프로젝트의 주요 내용 한 줄. [link] 가 있으면 [text] 안의 [Link.text] 부분을 링크로 보여준다.
- */
-@Immutable
-data class Highlight(
-    val text: String,
-    val link: Link? = null,
+    val image: DrawableResource? = null,
+    val aspectRatio: Float = STORE_ASPECT_RATIO,
 ) {
-    @Immutable
-    data class Link(val text: String, val url: String)
+    companion object {
+        const val STORE_ASPECT_RATIO = 9f / 16f
+
+        /** 휴대폰 화면 캡처(375×812) 비율 */
+        const val PHONE_ASPECT_RATIO = 375f / 812f
+    }
 }
 
 /** 홈의 대표 사이드 프로젝트 카드 */

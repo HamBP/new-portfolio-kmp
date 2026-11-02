@@ -56,13 +56,15 @@ fun NavigationBar(
     modifier: Modifier = Modifier,
 ) {
     val uriHandler = LocalUriHandler.current
+    // Color.Transparent 는 투명한 "검정"이라 흰색과 보간하면 중간에 어두운 색이 비친다.
+    // 같은 색의 알파 0 에서 시작해 투명도만 바뀌게 한다.
     val background by animateColorAsState(
-        targetValue = if (scrolled) PortfolioColors.White.copy(alpha = 0.92f) else Color.Transparent,
+        targetValue = PortfolioColors.White.copy(alpha = if (scrolled) 0.92f else 0f),
         animationSpec = tween(ScrollTransitionMillis),
         label = "navBackground",
     )
     val borderColor by animateColorAsState(
-        targetValue = if (scrolled) PortfolioColors.Border else Color.Transparent,
+        targetValue = PortfolioColors.Border.copy(alpha = if (scrolled) 1f else 0f),
         animationSpec = tween(ScrollTransitionMillis),
         label = "navBorder",
     )

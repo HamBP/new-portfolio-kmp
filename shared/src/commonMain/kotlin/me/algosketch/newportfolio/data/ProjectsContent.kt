@@ -2,8 +2,22 @@ package me.algosketch.newportfolio.data
 
 import me.algosketch.newportfolio.designsystem.theme.PortfolioColors
 import me.algosketch.newportfolio.model.Achievement
+import me.algosketch.newportfolio.model.Highlight
 import me.algosketch.newportfolio.model.Project
 import me.algosketch.newportfolio.model.Screenshot
+import newportfolio.shared.generated.resources.Res
+import newportfolio.shared.generated.resources.boolti_payment
+import newportfolio.shared.generated.resources.boolti_qr_entry
+import newportfolio.shared.generated.resources.boolti_ticket
+import newportfolio.shared.generated.resources.catchytape_home
+import newportfolio.shared.generated.resources.catchytape_player
+import newportfolio.shared.generated.resources.catchytape_playlist
+import newportfolio.shared.generated.resources.soak_bookmark
+import newportfolio.shared.generated.resources.soak_explore
+import newportfolio.shared.generated.resources.soak_home
+
+/** Catchy Tape 캡처(360×760) 비율 */
+private const val CATCHY_TAPE_ASPECT_RATIO = 360f / 760f
 
 /** 프로젝트 화면 문구. Figma Make 디자인의 내용을 그대로 옮겼다. */
 object ProjectsContent {
@@ -14,17 +28,25 @@ object ProjectsContent {
             duration = "2년 3개월+",
             tag = "Nexters 24기",
             description = "인디 밴드를 위한 공연 주최 및 입장 서비스",
-            longDescription = "인디 밴드가 공연을 직접 주최하고 팬이 티켓을 구매할 수 있는 Android 앱. 결제부터 입장 QR까지 전체 플로우를 담당했습니다.",
             techs = listOf("Compose", "MVVM", "Hilt", "Coroutine", "Firebase"),
             responsibilities = listOf(
-                "로그인, 푸시 알림, 동적 링크, 선물, 토스 페이먼츠 연동 담당",
-                "스크롤 가능한 앱바를 포함한 UI 인터랙션 구현",
-                "Navigation 이벤트 동시 발생에 대한 방어 로직 작성",
+                Highlight("공연 탐색·예매·티켓·선물·로그인 등 Android 앱의 주요 기능 개발 및 유지보수"),
+                Highlight("누적 회원 수 1900명, 티켓 판매 수 2500장, 거래액 1100만 원 달성"),
+                Highlight("2024년 출시 이후 30회 이상 버전 업데이트하며 지속적으로 서비스 운영"),
+                Highlight("일부 화면을 WebView 기반으로 전환하고, WebView와 네이티브 간 통신 구현"),
+                Highlight("사용자 행동 분석을 위해 Mixpanel 이벤트와 프로퍼티를 설계하고 주요 화면 및 사용자 행동 로그를 수집"),
+                Highlight(
+                    text = "Navigation 이벤트 동시 발생에 대한 방어 로직 작성",
+                    link = Highlight.Link(
+                        text = "Navigation 이벤트 동시 발생에 대한 방어 로직",
+                        url = "https://algosketch.tistory.com/189",
+                    ),
+                ),
             ),
             screenshots = listOf(
-                Screenshot("불티 홈 화면"),
-                Screenshot("불티 공연 목록"),
-                Screenshot("불티 티켓 상세"),
+                Screenshot("불티 티켓 화면", Res.drawable.boolti_ticket),
+                Screenshot("불티 예매 화면", Res.drawable.boolti_payment),
+                Screenshot("불티 QR 입장 화면", Res.drawable.boolti_qr_entry),
             ),
             achievements = listOf(
                 Achievement(
@@ -36,8 +58,8 @@ object ProjectsContent {
                     body = "뒤로 가기와 화면 이동 이벤트가 동시에 발생할 경우 발생하는 크래시를 분석하고, 화면 전환을 별도의 이벤트로 관리하여 순차적으로 처리될 수 있도록 수정했습니다.",
                 ),
             ),
-            githubUrl = Profile.GITHUB_URL,
-            storeUrl = "https://play.google.com",
+            githubUrl = "https://github.com/Nexters/Boolti",
+            storeUrl = "https://play.google.com/store/apps/details?id=com.nexters.boolti&hl=ko",
             accent = PortfolioColors.BooltiAccent,
             textAccent = PortfolioColors.BooltiAccentText,
             borderAccent = PortfolioColors.BooltiAccent.copy(alpha = 0x50 / 255f),
@@ -48,17 +70,16 @@ object ProjectsContent {
             duration = "9개월+",
             tag = "Nexters 27기",
             description = "AI가 요약하고 큐레이팅해 주는 데일리 뉴스레터 서비스",
-            longDescription = "AI가 뉴스를 자동 요약하고 사용자 관심사에 맞게 큐레이팅하는 뉴스레터 Android 앱. CI/CD 파이프라인 구축과 Firebase A/B Testing을 담당했습니다.",
             techs = listOf("Koin", "CI/CD", "Fastlane", "Firebase A/B Test"),
             responsibilities = listOf(
-                "홈 카드 인터랙션, CI/CD, GA 로깅 담당",
-                "Firebase A/B Testing 적용",
-                "AI 및 상호 코드 리뷰",
+                Highlight("탐색·페이지네이션·정렬·홈 인터랙션 등 주요 기능 개발"),
+                Highlight("Firebase App Distribution·Fastlane·GitHub Actions 기반 CI/CD 및 Play Store 배포 자동화"),
+                Highlight("Firebase Remote Config 기반 A/B Testing 및 Analytics 로그 설계"),
             ),
             screenshots = listOf(
-                Screenshot("쏙 홈 화면"),
-                Screenshot("쏙 뉴스레터 상세"),
-                Screenshot("쏙 큐레이팅 화면"),
+                Screenshot("쏙 추천 화면", Res.drawable.soak_home, Screenshot.PHONE_ASPECT_RATIO),
+                Screenshot("쏙 탐색 화면", Res.drawable.soak_explore, Screenshot.PHONE_ASPECT_RATIO),
+                Screenshot("쏙 보관함 화면", Res.drawable.soak_bookmark, Screenshot.PHONE_ASPECT_RATIO),
             ),
             achievements = listOf(
                 Achievement(
@@ -66,8 +87,8 @@ object ProjectsContent {
                     body = "PR merge 시 Firebase App Distribution에 자동 배포. Fastlane과 GitHub Actions를 이용해 Play 스토어 배포를 자동화했으며, Discord 봇 명령어로도 배포할 수 있도록 구성해 수동 빌드 과정을 완전히 제거했습니다.",
                 ),
             ),
-            githubUrl = Profile.GITHUB_URL,
-            storeUrl = "https://play.google.com",
+            githubUrl = "https://github.com/fairy-band/NewsLetter-Android",
+            storeUrl = "https://play.google.com/store/apps/details?id=com.fairyband.soak&hl=ko",
             accent = PortfolioColors.Body,
             textAccent = PortfolioColors.Body,
             borderAccent = PortfolioColors.Body.copy(alpha = 0x50 / 255f),
@@ -78,18 +99,18 @@ object ProjectsContent {
             duration = "2개월",
             tag = "팀 프로젝트",
             description = "노래 공유 및 음악 스트리밍 서비스",
-            longDescription = "사용자가 직접 녹음한 노래를 공유하고 스트리밍할 수 있는 앱. PM 겸 Android 개발을 담당하며 CI/CD 구축과 일정 관리 체계를 만들었습니다.",
             techs = listOf("View", "MVVM", "Hilt", "Coroutine", "Media3", "ExoPlayer", "CI/CD", "Kotest"),
             responsibilities = listOf(
-                "Kotest와 GitHub Actions를 이용한 CI/CD 구축",
-                "Light/Dark theme 대응 및 디자인 시스템 적용",
-                "멀티 모듈의 gradle 중복 코드 제거를 위해 gradle 플러그인 개발",
-                "HLS 구조를 파악하여 ExoPlayer의 오작동 문제 해결",
+                Highlight("Kotest와 GitHub Actions를 이용한 CI/CD 구축"),
+                Highlight("Light/Dark theme 대응 및 디자인 시스템 적용"),
+                Highlight("멀티 모듈의 gradle 중복 코드 제거를 위해 gradle 플러그인 개발"),
+                Highlight("HLS 구조를 파악하여 ExoPlayer의 오작동 문제 해결"),
+                Highlight("6주간 약 90개의 PR과 700개의 리뷰 코멘트 작성"),
             ),
             screenshots = listOf(
-                Screenshot("Catchy Tape 홈"),
-                Screenshot("Catchy Tape 플레이어"),
-                Screenshot("Catchy Tape 업로드"),
+                Screenshot("Catchy Tape 홈", Res.drawable.catchytape_home, CATCHY_TAPE_ASPECT_RATIO),
+                Screenshot("Catchy Tape 플레이어", Res.drawable.catchytape_player, CATCHY_TAPE_ASPECT_RATIO),
+                Screenshot("Catchy Tape 재생목록", Res.drawable.catchytape_playlist, CATCHY_TAPE_ASPECT_RATIO),
             ),
             achievements = listOf(
                 Achievement(
@@ -102,32 +123,6 @@ object ProjectsContent {
             accent = PortfolioColors.Muted,
             textAccent = PortfolioColors.Muted,
             borderAccent = PortfolioColors.Muted.copy(alpha = 0x50 / 255f),
-        ),
-        Project(
-            name = "Gradle Convention Plugin",
-            period = "2024.03",
-            duration = "1개월",
-            tag = "개인 프로젝트",
-            description = "멀티 모듈 프로젝트의 Gradle 중복 설정을 제거하는 컨벤션 플러그인",
-            longDescription = "멀티 모듈 Android 프로젝트에서 각 모듈마다 반복되는 Gradle 설정을 Convention Plugin으로 추출하여 중앙에서 관리할 수 있도록 구성했습니다. 플러그인 적용 이후 모듈당 build.gradle 파일 크기를 평균 70% 줄였습니다.",
-            techs = listOf("Gradle", "Kotlin DSL", "Android"),
-            responsibilities = listOf(
-                "공통 Android 설정을 플러그인으로 추출하여 단일 지점에서 관리",
-                "각 모듈은 필요한 플러그인만 선언해 설정 의도를 명확하게 표현",
-                "신규 모듈 추가 시 보일러플레이트 없이 즉시 사용 가능한 구조 설계",
-            ),
-            screenshots = emptyList(),
-            achievements = listOf(
-                Achievement(
-                    title = "Gradle 설정 중복으로 인한 유지보수 비용을 줄였습니다",
-                    body = "모듈이 늘어날수록 compileSdk, jvmTarget, kotlinOptions 등 공통 설정이 각 build.gradle에 흩어져 한 곳을 수정할 때 전체 모듈을 돌아야 하는 문제가 있었습니다. Convention Plugin으로 추출하면서 변경이 필요한 지점이 단 하나로 줄어들었고, 설정 누락으로 인한 빌드 오류도 사라졌습니다.",
-                ),
-            ),
-            githubUrl = Profile.GITHUB_URL,
-            storeUrl = null,
-            accent = PortfolioColors.SkyAccent,
-            textAccent = PortfolioColors.SkyAccentText,
-            borderAccent = PortfolioColors.SkyAccent.copy(alpha = 0x40 / 255f),
         ),
     )
 }

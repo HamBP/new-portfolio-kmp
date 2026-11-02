@@ -1,5 +1,6 @@
 package me.algosketch.newportfolio.screen.projects
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.shadow.Shadow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -40,6 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import me.algosketch.newportfolio.designsystem.component.ContentContainer
+import me.algosketch.newportfolio.designsystem.component.HighlightText
 import me.algosketch.newportfolio.designsystem.component.IconTextLink
 import me.algosketch.newportfolio.designsystem.component.SectionEyebrow
 import me.algosketch.newportfolio.designsystem.component.TechTag
@@ -52,6 +54,7 @@ import me.algosketch.newportfolio.designsystem.theme.PortfolioTheme
 import me.algosketch.newportfolio.model.Achievement
 import me.algosketch.newportfolio.model.Project
 import me.algosketch.newportfolio.model.Screenshot
+import org.jetbrains.compose.resources.painterResource
 
 private val ScreenShape = RoundedCornerShape(14.dp)
 private val TagShape = RoundedCornerShape(4.dp)
@@ -106,7 +109,6 @@ private fun PageHeader() {
         SectionLabel("Side Projects")
         Text(
             text = "프로젝트",
-            modifier = Modifier.padding(bottom = 20.dp),
             style = PortfolioTextStyle.sans(
                 size = PortfolioTheme.windowSize.fluidSp(min = 36f, vw = 6f, max = 60f),
                 color = PortfolioColors.Heading,
@@ -114,11 +116,6 @@ private fun PageHeader() {
                 lineHeight = 1f,
                 letterSpacing = (-2).sp,
             ),
-        )
-        Text(
-            text = "2020년부터 진행한 사이드 프로젝트들입니다.\n매 프로젝트마다 새로운 기술을 도입하고 문제를 해결해 왔습니다.",
-            modifier = Modifier.widthIn(max = 480.dp),
-            style = PortfolioTextStyle.sans(size = 16.sp, color = PortfolioColors.Secondary, lineHeight = 1.8f),
         )
     }
     HorizontalDivider(thickness = 1.dp, color = PortfolioColors.Border)
@@ -184,7 +181,7 @@ private fun ProjectArticle(
 
         Column(modifier = Modifier.padding(bottom = 52.dp)) {
             SectionLabel("담당 업무")
-            Responsibilities(project)
+            Responsibilities(project, onAction)
         }
 
         Column {
@@ -244,12 +241,7 @@ private fun ProjectIdentity(
         }
         Text(
             text = project.description,
-            modifier = Modifier.padding(bottom = 12.dp),
             style = PortfolioTextStyle.sans(size = 17.sp, color = PortfolioColors.Body, lineHeight = 1.7f),
-        )
-        Text(
-            text = project.longDescription,
-            style = PortfolioTextStyle.sans(size = 15.sp, color = PortfolioColors.Secondary, lineHeight = 1.8f),
         )
     }
 }
@@ -261,13 +253,23 @@ private fun ScreenMockup(
     accent: Color,
     modifier: Modifier = Modifier,
 ) {
+    val frame = modifier
+        .aspectRatio(screenshot.aspectRatio)
+        .dropShadow(ScreenShape, Shadow(radius = 20.dp, color = Color.Black.copy(alpha = 0.07f), offset = DpOffset(0.dp, 4.dp)))
+        .clip(ScreenShape)
+        .background(PortfolioColors.SurfaceAlt)
+        .border(1.dp, PortfolioColors.Border, ScreenShape)
+    screenshot.image?.let { image ->
+        Image(
+            painter = painterResource(image),
+            contentDescription = screenshot.description,
+            modifier = frame,
+            contentScale = ContentScale.Crop,
+        )
+        return
+    }
     Column(
-        modifier = modifier
-            .aspectRatio(9f / 19f)
-            .dropShadow(ScreenShape, Shadow(radius = 20.dp, color = Color.Black.copy(alpha = 0.07f), offset = DpOffset(0.dp, 4.dp)))
-            .clip(ScreenShape)
-            .background(PortfolioColors.SurfaceAlt)
-            .border(1.dp, PortfolioColors.Border, ScreenShape),
+        modifier = frame,
         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -301,7 +303,10 @@ private fun ScreenMockup(
 }
 
 @Composable
-private fun Responsibilities(project: Project) {
+private fun Responsibilities(
+    project: Project,
+    onAction: (ProjectsAction) -> Unit,
+) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         project.responsibilities.forEach { item ->
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -310,9 +315,10 @@ private fun Responsibilities(project: Project) {
                     modifier = Modifier.padding(top = 2.dp),
                     style = PortfolioTextStyle.mono(size = 13.sp, color = project.textAccent, lineHeight = 1.7f),
                 )
-                Text(
-                    text = item,
+                HighlightText(
+                    highlight = item,
                     style = PortfolioTextStyle.sans(size = 15.sp, color = PortfolioColors.Body, lineHeight = 1.7f),
+                    onLinkClick = { onAction(ProjectsAction.ClickLink(it)) },
                 )
             }
         }
