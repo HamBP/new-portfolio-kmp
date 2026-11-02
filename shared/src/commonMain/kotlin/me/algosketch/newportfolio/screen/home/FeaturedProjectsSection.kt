@@ -69,7 +69,7 @@ internal fun FeaturedProjectsSection(
 ) {
     ContentContainer(
         modifier = modifier
-            .background(PortfolioColors.SurfaceAlt)
+            .background(PortfolioColors.SectionBackground)
             .padding(vertical = PortfolioDimens.SectionVerticalPadding),
     ) {
         FlowRow(
