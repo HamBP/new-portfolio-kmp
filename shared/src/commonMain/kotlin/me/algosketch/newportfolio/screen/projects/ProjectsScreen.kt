@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -107,7 +106,6 @@ private fun PageHeader() {
         SectionLabel("Side Projects")
         Text(
             text = "프로젝트",
-            modifier = Modifier.padding(bottom = 20.dp),
             style = PortfolioTextStyle.sans(
                 size = PortfolioTheme.windowSize.fluidSp(min = 36f, vw = 6f, max = 60f),
                 color = PortfolioColors.Heading,
@@ -115,11 +113,6 @@ private fun PageHeader() {
                 lineHeight = 1f,
                 letterSpacing = (-2).sp,
             ),
-        )
-        Text(
-            text = "2020년부터 진행한 사이드 프로젝트들입니다.",
-            modifier = Modifier.widthIn(max = 480.dp),
-            style = PortfolioTextStyle.sans(size = 16.sp, color = PortfolioColors.Secondary, lineHeight = 1.8f),
         )
     }
     HorizontalDivider(thickness = 1.dp, color = PortfolioColors.Border)
