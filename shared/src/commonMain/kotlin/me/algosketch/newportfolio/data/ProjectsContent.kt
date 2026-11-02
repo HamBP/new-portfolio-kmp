@@ -8,9 +8,15 @@ import me.algosketch.newportfolio.model.Screenshot
 import newportfolio.shared.generated.resources.Res
 import newportfolio.shared.generated.resources.boolti_payment
 import newportfolio.shared.generated.resources.boolti_ticket
+import newportfolio.shared.generated.resources.catchytape_home
+import newportfolio.shared.generated.resources.catchytape_player
+import newportfolio.shared.generated.resources.catchytape_playlist
 import newportfolio.shared.generated.resources.soak_bookmark
 import newportfolio.shared.generated.resources.soak_explore
 import newportfolio.shared.generated.resources.soak_home
+
+/** Catchy Tape 캡처(360×760) 비율 */
+private const val CATCHY_TAPE_ASPECT_RATIO = 360f / 760f
 
 /** 프로젝트 화면 문구. Figma Make 디자인의 내용을 그대로 옮겼다. */
 object ProjectsContent {
@@ -101,9 +107,9 @@ object ProjectsContent {
                 Highlight("6주간 약 90개의 PR과 700개의 리뷰 코멘트 작성"),
             ),
             screenshots = listOf(
-                Screenshot("Catchy Tape 홈"),
-                Screenshot("Catchy Tape 플레이어"),
-                Screenshot("Catchy Tape 업로드"),
+                Screenshot("Catchy Tape 홈", Res.drawable.catchytape_home, CATCHY_TAPE_ASPECT_RATIO),
+                Screenshot("Catchy Tape 플레이어", Res.drawable.catchytape_player, CATCHY_TAPE_ASPECT_RATIO),
+                Screenshot("Catchy Tape 재생목록", Res.drawable.catchytape_playlist, CATCHY_TAPE_ASPECT_RATIO),
             ),
             achievements = listOf(
                 Achievement(
