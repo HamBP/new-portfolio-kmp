@@ -116,7 +116,7 @@ private fun PageHeader() {
             ),
         )
         Text(
-            text = "2020년부터 진행한 사이드 프로젝트들입니다.\n매 프로젝트마다 새로운 기술을 도입하고 문제를 해결해 왔습니다.",
+            text = "2020년부터 진행한 사이드 프로젝트들입니다.",
             modifier = Modifier.widthIn(max = 480.dp),
             style = PortfolioTextStyle.sans(size = 16.sp, color = PortfolioColors.Secondary, lineHeight = 1.8f),
         )
