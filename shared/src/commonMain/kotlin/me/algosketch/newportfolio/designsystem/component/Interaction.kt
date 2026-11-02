@@ -20,13 +20,16 @@ const val HoverTransitionMillis = 150
 
 /**
  * 링크·버튼처럼 동작하게 한다. 손가락 커서, 호버 감지, 클릭. 물결(ripple) 효과는 쓰지 않는다.
+ *
+ * 앱 전체가 `SelectionContainer` 안에 있어 안쪽 텍스트가 I-beam 커서를 내므로,
+ * `overrideDescendants` 로 자식 커서를 덮어 요소 전체에서 손가락 커서가 보이게 한다.
  */
 fun Modifier.webClickable(
     interactionSource: MutableInteractionSource,
     role: Role = Role.Button,
     onClick: () -> Unit,
 ): Modifier = this
-    .pointerHoverIcon(PointerIcon.Hand)
+    .pointerHoverIcon(PointerIcon.Hand, overrideDescendants = true)
     .hoverable(interactionSource)
     .clickable(
         interactionSource = interactionSource,
