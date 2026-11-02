@@ -111,31 +111,6 @@ object ProjectsContent {
             textAccent = PortfolioColors.Muted,
             borderAccent = PortfolioColors.Muted.copy(alpha = 0x50 / 255f),
         ),
-        Project(
-            name = "Gradle Convention Plugin",
-            period = "2024.03",
-            duration = "1개월",
-            tag = "개인 프로젝트",
-            description = "멀티 모듈 프로젝트의 Gradle 중복 설정을 제거하는 컨벤션 플러그인",
-            techs = listOf("Gradle", "Kotlin DSL", "Android"),
-            responsibilities = listOf(
-                Highlight("공통 Android 설정을 플러그인으로 추출하여 단일 지점에서 관리"),
-                Highlight("각 모듈은 필요한 플러그인만 선언해 설정 의도를 명확하게 표현"),
-                Highlight("신규 모듈 추가 시 보일러플레이트 없이 즉시 사용 가능한 구조 설계"),
-            ),
-            screenshots = emptyList(),
-            achievements = listOf(
-                Achievement(
-                    title = "Gradle 설정 중복으로 인한 유지보수 비용을 줄였습니다",
-                    body = "모듈이 늘어날수록 compileSdk, jvmTarget, kotlinOptions 등 공통 설정이 각 build.gradle에 흩어져 한 곳을 수정할 때 전체 모듈을 돌아야 하는 문제가 있었습니다. Convention Plugin으로 추출하면서 변경이 필요한 지점이 단 하나로 줄어들었고, 설정 누락으로 인한 빌드 오류도 사라졌습니다.",
-                ),
-            ),
-            githubUrl = Profile.GITHUB_URL,
-            storeUrl = null,
-            accent = PortfolioColors.SkyAccent,
-            textAccent = PortfolioColors.SkyAccentText,
-            borderAccent = PortfolioColors.SkyAccent.copy(alpha = 0x40 / 255f),
-        ),
     )
 }
 

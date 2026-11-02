@@ -13,7 +13,7 @@ class ProjectsViewModelTest {
         val viewModel = ProjectsViewModel()
 
         val names = viewModel.uiState.value.projects.map { it.name }
-        assertEquals(listOf("불티", "쏙", "Catchy Tape", "Gradle Convention Plugin"), names)
+        assertEquals(listOf("불티", "쏙", "Catchy Tape"), names)
         assertTrue(viewModel.uiState.value.projects.all { it.achievements.isNotEmpty() })
     }
 
