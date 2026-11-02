@@ -41,5 +41,6 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Kotlin/Wasm + Compo
 - 실행: `./gradlew :webApp:wasmJsBrowserDevelopmentRun` (JS: `./gradlew :webApp:jsBrowserDevelopmentRun`)
 - 테스트: `./gradlew :shared:wasmJsTest` (JS: `./gradlew :shared:jsTest`)
 - 배포 빌드: `./gradlew :webApp:wasmJsBrowserDistribution`
+- **구현 후 실제 앱 확인 (필수)**: 단위 테스트·빌드에 더해, 배포 빌드를 로컬 서버(`python -m http.server`)로 띄우고 헤드리스 Chrome(Playwright)으로 바뀐 화면을 열어 스크린샷과 콘솔 오류(`pageerror`·`console.error`)를 확인한 뒤 보고한다. (프롬프트 #25)
 - 배포: `/deploy` 스킬 (`.claude/skills/deploy`). 빌드 결과물을 HamBP/portfolio-page `main` 에 올린다 → https://hambp.github.io/portfolio-page/
 - Canvas 렌더링이라 브라우저 폰트로 대체되지 않는다. 한글·모노 폰트는 반드시 `composeResources/font` 에 번들한다 (`docs/SPEC.md` §4).
