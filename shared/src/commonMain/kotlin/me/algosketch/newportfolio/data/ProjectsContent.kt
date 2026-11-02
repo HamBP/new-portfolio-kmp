@@ -7,6 +7,7 @@ import me.algosketch.newportfolio.model.Project
 import me.algosketch.newportfolio.model.Screenshot
 import newportfolio.shared.generated.resources.Res
 import newportfolio.shared.generated.resources.boolti_payment
+import newportfolio.shared.generated.resources.boolti_qr_entry
 import newportfolio.shared.generated.resources.boolti_ticket
 import newportfolio.shared.generated.resources.catchytape_home
 import newportfolio.shared.generated.resources.catchytape_player
@@ -45,7 +46,7 @@ object ProjectsContent {
             screenshots = listOf(
                 Screenshot("불티 티켓 화면", Res.drawable.boolti_ticket),
                 Screenshot("불티 예매 화면", Res.drawable.boolti_payment),
-                Screenshot("불티 공연 목록"),
+                Screenshot("불티 QR 입장 화면", Res.drawable.boolti_qr_entry),
             ),
             achievements = listOf(
                 Achievement(
