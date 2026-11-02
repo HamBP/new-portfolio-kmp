@@ -2,6 +2,7 @@ package me.algosketch.newportfolio.model
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
+import org.jetbrains.compose.resources.DrawableResource
 
 /** 히어로 섹션의 강점 한 줄 */
 @Immutable
@@ -16,11 +17,11 @@ data class Metric(
     val label: String,
 )
 
-/** 화면 목업 자리. [imageUrl] 이 없으면 [description] 을 적은 빈 자리를 보여준다. */
+/** 화면 목업. [image] 가 없으면 [description] 을 적은 빈 자리를 보여준다. 이미지는 9:16 스토어 스크린샷. */
 @Immutable
 data class Screenshot(
     val description: String,
-    val imageUrl: String? = null,
+    val image: DrawableResource? = null,
 )
 
 /** 홈의 대표 사이드 프로젝트 카드 */

@@ -5,6 +5,9 @@ import me.algosketch.newportfolio.model.Achievement
 import me.algosketch.newportfolio.model.Highlight
 import me.algosketch.newportfolio.model.Project
 import me.algosketch.newportfolio.model.Screenshot
+import newportfolio.shared.generated.resources.Res
+import newportfolio.shared.generated.resources.boolti_payment
+import newportfolio.shared.generated.resources.boolti_ticket
 
 /** 프로젝트 화면 문구. Figma Make 디자인의 내용을 그대로 옮겼다. */
 object ProjectsContent {
@@ -31,9 +34,9 @@ object ProjectsContent {
                 ),
             ),
             screenshots = listOf(
-                Screenshot("불티 홈 화면"),
+                Screenshot("불티 티켓 화면", Res.drawable.boolti_ticket),
+                Screenshot("불티 예매 화면", Res.drawable.boolti_payment),
                 Screenshot("불티 공연 목록"),
-                Screenshot("불티 티켓 상세"),
             ),
             achievements = listOf(
                 Achievement(

@@ -2,6 +2,7 @@ package me.algosketch.newportfolio.screen.home
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -37,6 +38,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.shadow.Shadow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -46,6 +48,7 @@ import androidx.compose.ui.unit.sp
 import me.algosketch.newportfolio.designsystem.component.ContentContainer
 import me.algosketch.newportfolio.designsystem.component.HighlightText
 import me.algosketch.newportfolio.designsystem.component.IconTextLink
+import me.algosketch.newportfolio.designsystem.component.ScreenshotAspectRatio
 import me.algosketch.newportfolio.designsystem.component.SectionEyebrow
 import me.algosketch.newportfolio.designsystem.component.SectionTitle
 import me.algosketch.newportfolio.designsystem.component.TechTag
@@ -58,6 +61,7 @@ import me.algosketch.newportfolio.designsystem.theme.PortfolioTheme
 import me.algosketch.newportfolio.model.FeaturedProject
 import me.algosketch.newportfolio.model.Metric
 import me.algosketch.newportfolio.model.Screenshot
+import org.jetbrains.compose.resources.painterResource
 
 private val CardShape = RoundedCornerShape(16.dp)
 private val PhoneShape = RoundedCornerShape(20.dp)
@@ -310,20 +314,30 @@ private fun PhoneMockups(
     }
 }
 
-/** 9:19 폰 화면 자리. 아직 이미지가 없어 점선 테두리와 설명만 보여준다. */
+/** 폰 화면 목업. 이미지가 없으면 점선 테두리와 설명만 보여준다. */
 @Composable
 private fun PhoneMockup(
     screenshot: Screenshot,
     accent: Color,
     modifier: Modifier = Modifier,
 ) {
+    val frame = modifier
+        .aspectRatio(ScreenshotAspectRatio)
+        .dropShadow(PhoneShape, Shadow(radius = 20.dp, color = Color.Black.copy(alpha = 0.08f), offset = DpOffset(0.dp, 4.dp)))
+        .clip(PhoneShape)
+        .background(PortfolioColors.SurfaceAlt)
+        .border(1.dp, PortfolioColors.Border, PhoneShape)
+    screenshot.image?.let { image ->
+        Image(
+            painter = painterResource(image),
+            contentDescription = screenshot.description,
+            modifier = frame,
+            contentScale = ContentScale.Crop,
+        )
+        return
+    }
     Column(
-        modifier = modifier
-            .aspectRatio(9f / 19f)
-            .dropShadow(PhoneShape, Shadow(radius = 20.dp, color = Color.Black.copy(alpha = 0.08f), offset = DpOffset(0.dp, 4.dp)))
-            .clip(PhoneShape)
-            .background(PortfolioColors.SurfaceAlt)
-            .border(1.dp, PortfolioColors.Border, PhoneShape)
+        modifier = frame
             .drawBehind {
                 val stroke = 2.dp.toPx()
                 val inset = 1.dp.toPx() + stroke / 2

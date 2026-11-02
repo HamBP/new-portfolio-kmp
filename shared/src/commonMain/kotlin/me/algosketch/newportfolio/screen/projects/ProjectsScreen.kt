@@ -1,5 +1,6 @@
 package me.algosketch.newportfolio.screen.projects
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.shadow.Shadow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -41,6 +43,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import me.algosketch.newportfolio.designsystem.component.ContentContainer
 import me.algosketch.newportfolio.designsystem.component.HighlightText
 import me.algosketch.newportfolio.designsystem.component.IconTextLink
+import me.algosketch.newportfolio.designsystem.component.ScreenshotAspectRatio
 import me.algosketch.newportfolio.designsystem.component.SectionEyebrow
 import me.algosketch.newportfolio.designsystem.component.TechTag
 import me.algosketch.newportfolio.designsystem.component.TechTagSize
@@ -52,6 +55,7 @@ import me.algosketch.newportfolio.designsystem.theme.PortfolioTheme
 import me.algosketch.newportfolio.model.Achievement
 import me.algosketch.newportfolio.model.Project
 import me.algosketch.newportfolio.model.Screenshot
+import org.jetbrains.compose.resources.painterResource
 
 private val ScreenShape = RoundedCornerShape(14.dp)
 private val TagShape = RoundedCornerShape(4.dp)
@@ -250,13 +254,23 @@ private fun ScreenMockup(
     accent: Color,
     modifier: Modifier = Modifier,
 ) {
+    val frame = modifier
+        .aspectRatio(ScreenshotAspectRatio)
+        .dropShadow(ScreenShape, Shadow(radius = 20.dp, color = Color.Black.copy(alpha = 0.07f), offset = DpOffset(0.dp, 4.dp)))
+        .clip(ScreenShape)
+        .background(PortfolioColors.SurfaceAlt)
+        .border(1.dp, PortfolioColors.Border, ScreenShape)
+    screenshot.image?.let { image ->
+        Image(
+            painter = painterResource(image),
+            contentDescription = screenshot.description,
+            modifier = frame,
+            contentScale = ContentScale.Crop,
+        )
+        return
+    }
     Column(
-        modifier = modifier
-            .aspectRatio(9f / 19f)
-            .dropShadow(ScreenShape, Shadow(radius = 20.dp, color = Color.Black.copy(alpha = 0.07f), offset = DpOffset(0.dp, 4.dp)))
-            .clip(ScreenShape)
-            .background(PortfolioColors.SurfaceAlt)
-            .border(1.dp, PortfolioColors.Border, ScreenShape),
+        modifier = frame,
         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
