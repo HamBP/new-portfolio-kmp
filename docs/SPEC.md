@@ -123,6 +123,8 @@ Compose for Web 은 DOM 이 아니라 Canvas 에 그리므로 아래 사항을 �
 | 2026-11-02 | 지표 그리드가 2열일 때도 첫 칸만 왼쪽 구분선이 없다 (3번째 칸에 구분선 있음) | 디자인 CSS 와 동일하게 유지 |
 | 2026-11-02 | 그림자(`box-shadow`)는 `Modifier.dropShadow` 로 같은 반경·오프셋·투명도 적용 | |
 | 2026-11-02 | 호버 효과는 `Modifier.webClickable` + `hoverColor` (150ms 색 전환), 물결 효과 없음 | 디자인의 `transition: 0.15s` 와 웹 링크 느낌 유지 |
+| 2026-11-03 | 배포는 별도 저장소 HamBP/portfolio-page 의 `main` 루트(GitHub Pages, https://hambp.github.io/portfolio-page/)에 wasmJs 배포 빌드를 커밋하는 방식. `/deploy` 스킬로 실행하며, 기존 파일을 모두 지우고 교체하고 `.nojekyll` 을 둔다 | 사용자 요청 (프롬프트 #6). 기존 포트폴리오가 이미 그 저장소·주소로 서빙 중. 빌드마다 `.wasm` 파일명 해시가 바뀌어 덮어쓰기만 하면 옛 파일이 쌓임 |
+| 2026-11-03 | 배포는 GitHub Actions 자동 배포가 아니라 수동 명령(`/deploy`)으로 한다. 배포 커밋 메시지에 소스 커밋 해시를 남긴다 | 사용자가 명령으로 실행하길 원함. 배포 저장소가 소스와 분리돼 있어 어떤 소스가 배포됐는지 추적하기 위함 |
 
 ---
 
@@ -130,4 +132,3 @@ Compose for Web 은 DOM 이 아니라 Canvas 에 그리므로 아래 사항을 �
 - 프로젝트 화면 목업 이미지 채우기 (디자인에서는 빈 자리 표시). `Screenshot.imageUrl` 을 채우고 이미지 표시를 구현해야 한다.
 - LinkedIn 주소(`Profile.LINKEDIN_URL`)와 프로젝트별 GitHub·스토어 주소가 디자인의 임시 값이다.
 - `index.html` 의 제목·meta·OG 태그, 로딩 표시 정리 (§4).
-- 배포 대상 결정 (GitHub Pages 등).
