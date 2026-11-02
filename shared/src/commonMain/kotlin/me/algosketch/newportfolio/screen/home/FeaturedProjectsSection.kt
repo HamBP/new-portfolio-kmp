@@ -38,19 +38,13 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.LinkAnnotation
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextLinkStyles
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.algosketch.newportfolio.designsystem.component.ContentContainer
+import me.algosketch.newportfolio.designsystem.component.HighlightText
 import me.algosketch.newportfolio.designsystem.component.IconTextLink
 import me.algosketch.newportfolio.designsystem.component.SectionEyebrow
 import me.algosketch.newportfolio.designsystem.component.SectionTitle
@@ -62,7 +56,6 @@ import me.algosketch.newportfolio.designsystem.theme.PortfolioDimens
 import me.algosketch.newportfolio.designsystem.theme.PortfolioTextStyle
 import me.algosketch.newportfolio.designsystem.theme.PortfolioTheme
 import me.algosketch.newportfolio.model.FeaturedProject
-import me.algosketch.newportfolio.model.Highlight
 import me.algosketch.newportfolio.model.Metric
 import me.algosketch.newportfolio.model.Screenshot
 
@@ -237,7 +230,11 @@ private fun ProjectDetails(
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     val style = PortfolioTextStyle.sans(size = 13.sp, color = PortfolioColors.Muted, lineHeight = 1.6f)
                     Text(text = "–", style = style.copy(color = project.accent))
-                    HighlightText(highlight = highlight, style = style, onAction = onAction)
+                    HighlightText(
+                        highlight = highlight,
+                        style = style,
+                        onLinkClick = { onAction(HomeAction.ClickLink(it)) },
+                    )
                 }
             }
         }
@@ -354,45 +351,4 @@ private fun PhoneMockup(
             textAlign = TextAlign.Center,
         )
     }
-}
-
-/** 주요 내용 한 줄. 링크 부분은 제목색·굵게·밑줄로 보여주고 누르면 연다. */
-@Composable
-private fun HighlightText(
-    highlight: Highlight,
-    style: TextStyle,
-    onAction: (HomeAction) -> Unit,
-) {
-    val link = highlight.link
-    if (link == null) {
-        Text(text = highlight.text, style = style)
-        return
-    }
-    val text = remember(highlight) {
-        val start = highlight.text.indexOf(link.text)
-        buildAnnotatedString {
-            if (start < 0) {
-                append(highlight.text)
-                return@buildAnnotatedString
-            }
-            append(highlight.text.substring(0, start))
-            withLink(
-                LinkAnnotation.Clickable(
-                    tag = link.url,
-                    styles = TextLinkStyles(
-                        style = SpanStyle(
-                            color = PortfolioColors.Heading,
-                            fontWeight = FontWeight.Medium,
-                            textDecoration = TextDecoration.Underline,
-                        ),
-                    ),
-                    linkInteractionListener = { onAction(HomeAction.ClickLink(link.url)) },
-                ),
-            ) {
-                append(link.text)
-            }
-            append(highlight.text.substring(start + link.text.length))
-        }
-    }
-    Text(text = text, style = style)
 }
