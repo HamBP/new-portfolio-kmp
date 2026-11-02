@@ -4,6 +4,7 @@ import me.algosketch.newportfolio.designsystem.theme.PortfolioColors
 import me.algosketch.newportfolio.model.Contribution
 import me.algosketch.newportfolio.model.ContributionTag
 import me.algosketch.newportfolio.model.FeaturedProject
+import me.algosketch.newportfolio.model.Highlight
 import me.algosketch.newportfolio.model.Metric
 import me.algosketch.newportfolio.model.Screenshot
 import me.algosketch.newportfolio.model.Strength
@@ -40,12 +41,18 @@ object HomeContent {
                 Metric("33개", "Play 스토어 버전"),
             ),
             highlights = listOf(
-                "공연 탐색·예매·티켓·선물·로그인 등 Android 앱의 주요 기능 개발 및 유지보수",
-                "누적 회원 수 1900명, 티켓 판매 수 2500장, 거래액 1100만 원 달성",
-                "2024년 출시 이후 30회 이상 버전 업데이트하며 지속적으로 서비스 운영",
-                "일부 화면을 WebView 기반으로 전환하고, WebView와 네이티브 간 통신 구현",
-                "사용자 행동 분석을 위해 Mixpanel 이벤트와 프로퍼티를 설계하고 주요 화면 및 사용자 행동 로그를 수집",
-                "Navigation 이벤트 동시 발생에 대한 방어 로직 작성",
+                Highlight("공연 탐색·예매·티켓·선물·로그인 등 Android 앱의 주요 기능 개발 및 유지보수"),
+                Highlight("누적 회원 수 1900명, 티켓 판매 수 2500장, 거래액 1100만 원 달성"),
+                Highlight("2024년 출시 이후 30회 이상 버전 업데이트하며 지속적으로 서비스 운영"),
+                Highlight("일부 화면을 WebView 기반으로 전환하고, WebView와 네이티브 간 통신 구현"),
+                Highlight("사용자 행동 분석을 위해 Mixpanel 이벤트와 프로퍼티를 설계하고 주요 화면 및 사용자 행동 로그를 수집"),
+                Highlight(
+                    text = "Navigation 이벤트 동시 발생에 대한 방어 로직 작성",
+                    link = Highlight.Link(
+                        text = "Navigation 이벤트 동시 발생에 대한 방어 로직",
+                        url = "https://algosketch.tistory.com/189",
+                    ),
+                ),
             ),
             screenshots = listOf(
                 Screenshot("불티 홈 화면"),
