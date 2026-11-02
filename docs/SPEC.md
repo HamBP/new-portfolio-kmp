@@ -46,10 +46,23 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Figma Make 로 만�
 | 구분선 | `#e5e7eb` |
 | 보조 배경 | `#f9fafb`, 태그 배경 `#f3f4f6` |
 | 불티 강조색 | `#FF6827` (흰 배경 텍스트용 `#c05214`) |
-| 폰트 | Pretendard (본문), monospace (기간·태그·수치) |
+| 폰트 | Pretendard 서브셋 (본문, 400·500·600·700), JetBrains Mono NL (기간·태그·수치, 400·600·700) |
+| 기본 줄 높이 | 1.5 (CSS 기본값과 같게, 남는 공간은 글자 위아래에 균등 분배) |
 | 콘텐츠 최대 폭 / 좌우 여백 | 1000px / 24px |
 | Navigation 높이 | 60px |
 | 반응형 기준 | 700px 이하에서 2열 그리드 → 1열, 지표 4열 → 2열 |
+
+### 3.1 코드 위치 (`shared/src/commonMain/kotlin/me/algosketch/newportfolio/designsystem`)
+
+| 파일 | 내용 |
+|---|---|
+| `theme/Color.kt` | `PortfolioColors` 색 토큰 |
+| `theme/Dimens.kt` | `PortfolioDimens` 콘텐츠 폭·여백·Navigation 높이·반응형 기준 |
+| `theme/Type.kt` | 번들 폰트 로드, `PortfolioTextStyle.sans/mono` |
+| `theme/WindowSize.kt` | 창 크기(`isCompact`, CSS `clamp()` 대체 `fluidSp`) |
+| `theme/Theme.kt` | `PortfolioTheme` (폰트를 다 받은 뒤 콘텐츠 표시) |
+| `icon/LucideIcons.kt` | lucide 아이콘 `ImageVector` |
+| `component/` | `ContentContainer`, `SectionEyebrow`, `SectionTitle`, `TechTag`, `IconTextLink`, `Modifier.webClickable` |
 
 ## 4. 웹(Canvas) 구현 시 고려사항
 
@@ -72,6 +85,11 @@ Compose for Web 은 DOM 이 아니라 Canvas 에 그리므로 아래 사항을 �
 | 2026-11-02 | HanilKeyboard 의 Claude 설정(`CLAUDE.md`)과 문서 체계(`SPEC.md`, `PROMPTS.md`)를 가져옴. `CONVERSION_RULES.md` 는 키보드 전용이라 제외 | 사용자 요청 (프롬프트 #2) |
 | 2026-11-02 | 기본 보호 브랜치는 `master` (HanilKeyboard 의 `main` 대신) | 이 저장소의 기본 브랜치 이름이 `master` |
 | 2026-11-02 | 커밋 메시지는 한국어, `.idea/` 등 IDE 설정은 커밋하지 않음 | HanilKeyboard 규칙 유지 |
+| 2026-11-02 | 원격 기본 브랜치는 `main`. `develop` 을 원격에 올리고 PR 은 `develop` 대상으로 만든다 | 원격 저장소(HamBP/new-portfolio-kmp)의 기본 브랜치가 `main` |
+| 2026-11-02 | 폰트는 Pretendard 1.3.9 OTF 4종을 **KS X 1001 한글 2,350자 + 라틴·문장부호·화살표·도형·한글 자모**로 서브셋(굵기당 약 350KB)하고, JetBrains Mono **NL** TTF 3종과 함께 번들 (약 2MB). 라이선스는 `licenses/` | 전체 Pretendard 는 굵기당 1.5MB 이상. Pretendard **Std** 는 한글이 없는 라틴 전용판이라 쓸 수 없음. NL 은 합자(ligature) 없는 버전이라 `->` 등이 바뀌지 않음. 서브셋 밖 글자(예: `뷁`)는 표시되지 않으므로 문구 추가 시 확인 필요 |
+| 2026-11-02 | 폰트를 모두 받은 뒤에 화면을 그리고, 두 글꼴을 `FontFamily.Resolver.preload` 로 등록해 서로 없는 글리프를 대체 (모노의 한글 → Pretendard, Pretendard 의 `▸` → JetBrains Mono) | Canvas 는 브라우저 폰트 대체가 없어 늦게 온 폰트·없는 글리프가 빈 칸으로 보임. 디자인의 `monospace` 텍스트에 한글(`2,200장`, `블로그`)이 섞여 있음 |
+| 2026-11-02 | CSS `clamp(min, Nvw, max)` 는 `WindowSize.fluidSp`, `@media (max-width: 700px)` 는 `WindowSize.isCompact` 로 대체 | Compose 에는 CSS 단위가 없음 |
+| 2026-11-02 | 호버 효과는 `Modifier.webClickable` + `hoverColor` (150ms 색 전환), 물결 효과 없음 | 디자인의 `transition: 0.15s` 와 웹 링크 느낌 유지 |
 
 ---
 
