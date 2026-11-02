@@ -38,3 +38,27 @@ HanilKeyboard 프로젝트의 규칙을 가져왔다. (#2)
 > 앞선 PR부터 차례로 머지해줘
 
 이슈 #1 의 PR #2 → #3 → #4 → #5 를 순서대로 병합한다.
+
+## #5 (2026-11-02) 질문: GitHub Pages 배포 방법
+
+> 이 사이트를 배포하려면 어떻게 해야 하는지 알려줘
+
+> 이 사이트를 github pages에 배포하려면 어떻게 해야 하는지 알려줘
+
+## #6 (2026-11-03) 배포 스킬 만들기
+
+> https://github.com/HamBP/portfolio-page 이 프로젝트에서 이 위치에 배포하도록 하는 스킬을 만들어줘. 명령어로 실행할 거야
+
+`/deploy` 스킬(`.claude/skills/deploy`)로 구현. 빌드 결과물을 HamBP/portfolio-page `main` 루트에 교체 커밋·push 한다.
+
+## #7 (2026-11-03) 첫 배포
+
+> /deploy
+
+`feature/6-deploy-skill` @ `d7cba8e` (사이트 코드는 `develop` 과 동일)에서 배포. 기존 포트폴리오를 새 사이트로 교체.
+
+## #8 (2026-11-03) PR 병합
+
+> 응 머지해줘
+
+PR #6 을 `develop` 에 병합한다.
