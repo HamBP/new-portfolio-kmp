@@ -244,12 +244,7 @@ private fun ProjectIdentity(
         }
         Text(
             text = project.description,
-            modifier = Modifier.padding(bottom = 12.dp),
             style = PortfolioTextStyle.sans(size = 17.sp, color = PortfolioColors.Body, lineHeight = 1.7f),
-        )
-        Text(
-            text = project.longDescription,
-            style = PortfolioTextStyle.sans(size = 15.sp, color = PortfolioColors.Secondary, lineHeight = 1.8f),
         )
     }
 }

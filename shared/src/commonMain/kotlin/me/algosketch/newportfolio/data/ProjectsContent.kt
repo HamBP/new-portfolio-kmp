@@ -14,7 +14,6 @@ object ProjectsContent {
             duration = "2년 3개월+",
             tag = "Nexters 24기",
             description = "인디 밴드를 위한 공연 주최 및 입장 서비스",
-            longDescription = "인디 밴드가 공연을 직접 주최하고 팬이 티켓을 구매할 수 있는 Android 앱. 결제부터 입장 QR까지 전체 플로우를 담당했습니다.",
             techs = listOf("Compose", "MVVM", "Hilt", "Coroutine", "Firebase"),
             responsibilities = listOf(
                 "로그인, 푸시 알림, 동적 링크, 선물, 토스 페이먼츠 연동 담당",
@@ -48,7 +47,6 @@ object ProjectsContent {
             duration = "9개월+",
             tag = "Nexters 27기",
             description = "AI가 요약하고 큐레이팅해 주는 데일리 뉴스레터 서비스",
-            longDescription = "AI가 뉴스를 자동 요약하고 사용자 관심사에 맞게 큐레이팅하는 뉴스레터 Android 앱. CI/CD 파이프라인 구축과 Firebase A/B Testing을 담당했습니다.",
             techs = listOf("Koin", "CI/CD", "Fastlane", "Firebase A/B Test"),
             responsibilities = listOf(
                 "홈 카드 인터랙션, CI/CD, GA 로깅 담당",
@@ -78,7 +76,6 @@ object ProjectsContent {
             duration = "2개월",
             tag = "팀 프로젝트",
             description = "노래 공유 및 음악 스트리밍 서비스",
-            longDescription = "사용자가 직접 녹음한 노래를 공유하고 스트리밍할 수 있는 앱. PM 겸 Android 개발을 담당하며 CI/CD 구축과 일정 관리 체계를 만들었습니다.",
             techs = listOf("View", "MVVM", "Hilt", "Coroutine", "Media3", "ExoPlayer", "CI/CD", "Kotest"),
             responsibilities = listOf(
                 "Kotest와 GitHub Actions를 이용한 CI/CD 구축",
@@ -109,7 +106,6 @@ object ProjectsContent {
             duration = "1개월",
             tag = "개인 프로젝트",
             description = "멀티 모듈 프로젝트의 Gradle 중복 설정을 제거하는 컨벤션 플러그인",
-            longDescription = "멀티 모듈 Android 프로젝트에서 각 모듈마다 반복되는 Gradle 설정을 Convention Plugin으로 추출하여 중앙에서 관리할 수 있도록 구성했습니다. 플러그인 적용 이후 모듈당 build.gradle 파일 크기를 평균 70% 줄였습니다.",
             techs = listOf("Gradle", "Kotlin DSL", "Android"),
             responsibilities = listOf(
                 "공통 Android 설정을 플러그인으로 추출하여 단일 지점에서 관리",

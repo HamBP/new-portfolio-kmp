@@ -24,7 +24,6 @@ data class Project(
     val duration: String,
     val tag: String,
     val description: String,
-    val longDescription: String,
     val techs: List<String>,
     val responsibilities: List<String>,
     val screenshots: List<Screenshot>,
