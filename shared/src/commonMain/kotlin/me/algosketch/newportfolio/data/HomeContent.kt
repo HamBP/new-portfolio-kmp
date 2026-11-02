@@ -9,20 +9,20 @@ import me.algosketch.newportfolio.model.Screenshot
 import me.algosketch.newportfolio.model.Strength
 import me.algosketch.newportfolio.model.TimelineItem
 
-/** 홈 화면 문구. Figma Make 디자인의 내용을 그대로 옮겼다. */
+/** 홈 화면 문구. Figma Make 디자인의 내용을 옮기고, 자기소개(strengths)는 사용자가 준 문구로 바꿨다. */
 object HomeContent {
     val strengths = listOf(
         Strength(
+            title = "Android 앱의 배포와 운영을 경험한 개발자입니다",
+            description = "2020년부터 개발 동아리에 참여하여 현재까지 6개의 앱을 스토어에 배포했으며, 현재는 불티와 쏙 두 앱을 운영 및 업데이트하고 있습니다.",
+        ),
+        Strength(
             title = "다양한 직무 경험을 바탕으로 협업합니다",
-            description = "디자인, 프론트엔드, 백엔드를 모두 경험했습니다. 협업 과정에서 더 효율적으로 소통할 수 있습니다.",
+            description = "디자인, 프론트엔드, 백엔드를 모두 경험했습니다. 협업 과정에서 더 효율적으로 소통할 수 있으며, 담당 영역의 경계를 따지기보다 제가 해결할 수 있는 문제라면 먼저 확인하고 해결하려 합니다.",
         ),
         Strength(
-            title = "UI 디테일에 강점이 있습니다",
-            description = "간격의 미묘한 틀어짐이나 작은 색상의 차이를 잘 인지합니다. Figma의 Auto Layout이나 레이어 계층을 보고 디자이너의 의도를 파악해 구현합니다.",
-        ),
-        Strength(
-            title = "개발에 흥미가 많습니다",
-            description = "2020년부터 꾸준히 개발하고 있습니다. 매 프로젝트마다 새로운 기술이나 방법을 적용해 보며 학습해 왔습니다.",
+            title = "AI와 기본기를 함께 활용하는 개발을 지향합니다",
+            description = "AI를 적극적으로 활용해 생산성을 높이는 한편, 개발 원리를 이해하고 직접 구현하는 역량 역시 중요하게 생각합니다. 이를 위해 AI 중심으로 진행하는 프로젝트와 직접 코드를 작성하며 학습하는 프로젝트를 병행하고 있습니다.",
         ),
     )
 
