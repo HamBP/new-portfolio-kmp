@@ -37,6 +37,25 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Figma Make 로 만�
 - **FeaturedProjects**: 대표 프로젝트 카드(지표 4개, 하이라이트, 링크, 폰 목업 이미지 2장). "프로젝트 모두 보기" → `/projects`.
 - **ProjectsPage**: 프로젝트별 소개, 화면 목업 3장(가운데 장은 16px 아래로), 기술 태그, 담당 업무, 문제 해결 스토리.
 
+### 2.1 코드 구조 (이슈 #1)
+
+[Boolti](https://github.com/Nexters/Boolti) 구조를 참고하되 **싱글 모듈**(`shared` 의 `commonMain`)에 패키지로 나눈다.
+
+| 패키지 | 내용 |
+|---|---|
+| `designsystem/` | 테마·토큰·아이콘·공통 컴포넌트 (§3.1) |
+| `navigation/` | 해시 라우팅 |
+| `app/` | 앱 뼈대(`PortfolioApp`), `NavigationBar`, `Footer` |
+| `model/` | 화면에 쓰는 데이터 모델 |
+| `data/` | 문구 데이터(`Profile`, `HomeContent`, …). 서버가 없어 정적 객체로 둔다 |
+| `screen/{화면}/` | `{화면}Contract.kt`(UiState·Action·Event), `{화면}ViewModel.kt`, `{화면}Screen.kt`, 섹션 컴포저블 |
+
+**MVI** ([Boolti PR #582](https://github.com/Nexters/Boolti/pull/582) 방식)
+- ViewModel 의 공개 멤버는 `uiState: StateFlow<UiState>`, `event: Flow<Event>`(`Channel` 기반 1회성), `onAction(Action)` 뿐이다.
+- `{화면}Screen` 은 ViewModel 을 받아 상태를 구독하고 Event(화면 이동, 링크 열기)를 처리한다. 실제 그리기는 상태와 `onAction` 만 받는 `{화면}ScreenContent` 가 맡는다.
+- 사용자 입력은 모두 Action 으로 보낸다. 상태가 바뀌는 입력(타임라인 칩)은 UiState 를, 밖으로 나가는 입력(링크, 화면 이동)은 Event 를 만든다.
+- 웹 특성상 바꾼 점: Hilt 대신 `viewModel { HomeViewModel() }` 로 직접 생성. 화면 이동은 Navigation Compose 대신 `PortfolioNavigator`.
+
 ## 3. 디자인 토큰 (Figma Make 기준)
 
 | 용도 | 값 |
@@ -95,6 +114,11 @@ Compose for Web 은 DOM 이 아니라 Canvas 에 그리므로 아래 사항을 �
 | 2026-11-02 | 라우팅은 Navigation Compose 대신 직접 만든 해시 라우터(`PortfolioNavigator`) | 페이지가 2개뿐이고, 디자인과 같은 `/#/projects` 주소·브라우저 뒤로 가기를 단순하게 맞출 수 있음 |
 | 2026-11-02 | Navigation 의 `backdrop-filter: blur(12px)` 는 생략하고 92% 불투명 흰 배경만 적용 | Canvas 에서 뒤 콘텐츠 블러는 비용이 크고, 92% 불투명이라 차이가 거의 없음 |
 | 2026-11-02 | 창 폭 480px 미만에서는 Navigation 의 이메일 글자 대신 메일 아이콘을 보여준다 | 디자인은 좁은 화면에서 줄바꿈 없이 넘쳐 잘림 |
+| 2026-11-02 | 타임라인 수상 배지의 🏆 이모지를 lucide `Trophy` 아이콘(11px)으로 대체 | 컬러 이모지 폰트(약 10MB)를 번들하지 않기 위함 |
+| 2026-11-02 | Hero 의 SVG `feTurbulence` 노이즈를 250px 무작위 회색 점 타일(`ImageShader` 반복)로 대체. 불투명도는 0.045 × 0.5 | Canvas 에 SVG 필터가 없음. feTurbulence 출력 알파 평균(약 0.5)을 곱해 밝기를 맞춤 |
+| 2026-11-02 | 그 외 활동 설명의 블로그 링크는 굵기·색만 적용하고 `border-bottom: 1px #e5e7eb` 밑줄은 생략 | Compose 텍스트 밑줄은 글자색과 같은 색만 지원 |
+| 2026-11-02 | 지표 그리드가 2열일 때도 첫 칸만 왼쪽 구분선이 없다 (3번째 칸에 구분선 있음) | 디자인 CSS 와 동일하게 유지 |
+| 2026-11-02 | 그림자(`box-shadow`)는 `Modifier.dropShadow` 로 같은 반경·오프셋·투명도 적용 | |
 | 2026-11-02 | 호버 효과는 `Modifier.webClickable` + `hoverColor` (150ms 색 전환), 물결 효과 없음 | 디자인의 `transition: 0.15s` 와 웹 링크 느낌 유지 |
 
 ---
