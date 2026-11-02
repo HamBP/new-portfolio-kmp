@@ -34,8 +34,8 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Figma Make 로 만�
 - **코드 위치**: 라우팅 `navigation/` (`Route`, `PortfolioNavigator`, 해시 접근은 `BrowserLocation` expect/actual), 앱 뼈대 `app/` (`PortfolioApp`, `NavigationBar`, `Footer`), 화면 `screen/{home,projects}/`.
   - `PortfolioNavigator.navigate` 는 해시만 바꾸고 `hashchange` 이벤트로 화면을 바꾼다. 브라우저 뒤로 가기·주소 직접 입력도 같은 흐름.
   - 페이지 전체가 하나의 `verticalScroll` 이고 그 위에 Navigation 이 겹쳐 고정된다. 페이지 내용은 `SelectionContainer` 로 감싸 텍스트를 복사할 수 있다.
-- **HeroSection**: 화면 높이 가득, 이름·직무·강점 3개, 종이 질감 노이즈 배경, 아래쪽 바운스 화살표.
-- **FeaturedProjects**: 대표 프로젝트 카드(지표 4개, 하이라이트, 링크, 폰 목업 이미지 2장). "프로젝트 모두 보기" → `/projects`.
+- **HeroSection**: 화면 높이 가득, 이름·직무·강점(자기소개) 3개 (문구는 `data/HomeContent.kt`, 사용자 제공 문구), 종이 질감 노이즈 배경, 아래쪽 바운스 화살표.
+- **FeaturedProjects**: 대표 프로젝트 카드(지표 4개, 하이라이트, 링크, 폰 목업 이미지 2장). 하이라이트는 `Highlight` 모델로, 문장 일부를 링크(제목색·굵게·밑줄)로 둘 수 있다. "프로젝트 모두 보기" → `/projects`.
 - **ProjectsPage**: 프로젝트별 소개, 화면 목업 3장(가운데 장은 16px 아래로), 기술 태그, 담당 업무, 문제 해결 스토리.
   - 목업 이미지가 없는 프로젝트(Gradle Convention Plugin)는 목업 줄을, 스토어 주소가 없는 프로젝트는 "Play 스토어" 링크를 그리지 않는다.
   - 문구는 `data/ProjectsContent.kt`. 프로젝트마다 장식용 `accent`, 글자용 `textAccent`(흰 배경 대비 4.5:1 이상), 스토리 선 `borderAccent` 색을 가진다.
@@ -69,7 +69,7 @@ Android 개발자 송준영의 포트폴리오 웹사이트. Figma Make 로 만�
 | 흐린 텍스트(12px 이상) | `#6b7280` |
 | 더 흐린 텍스트 | `#9ca3af`, `#d1d5db` |
 | 구분선 | `#e5e7eb` |
-| 보조 배경 | `#f9fafb`, 태그 배경 `#f3f4f6` |
+| 보조 배경 | `#f9fafb`, 태그 배경 `#f3f4f6`, 홈 회색 섹션 배경 `#f3f4f6` (`SectionBackground`) |
 | 불티 강조색 | `#FF6827` (흰 배경 텍스트용 `#c05214`) |
 | 폰트 | Pretendard 서브셋 (본문, 400·500·600·700), JetBrains Mono NL (기간·태그·수치, 400·600·700) |
 | 기본 줄 높이 | 1.5 (CSS 기본값과 같게, 남는 공간은 글자 위아래에 균등 분배) |
@@ -125,6 +125,10 @@ Compose for Web 은 DOM 이 아니라 Canvas 에 그리므로 아래 사항을 �
 | 2026-11-02 | 호버 효과는 `Modifier.webClickable` + `hoverColor` (150ms 색 전환), 물결 효과 없음 | 디자인의 `transition: 0.15s` 와 웹 링크 느낌 유지 |
 | 2026-11-03 | 배포는 별도 저장소 HamBP/portfolio-page 의 `main` 루트(GitHub Pages, https://hambp.github.io/portfolio-page/)에 wasmJs 배포 빌드를 커밋하는 방식. `/deploy` 스킬로 실행하며, 기존 파일을 모두 지우고 교체하고 `.nojekyll` 을 둔다 | 사용자 요청 (프롬프트 #6). 기존 포트폴리오가 이미 그 저장소·주소로 서빙 중. 빌드마다 `.wasm` 파일명 해시가 바뀌어 덮어쓰기만 하면 옛 파일이 쌓임 |
 | 2026-11-03 | 배포는 GitHub Actions 자동 배포가 아니라 수동 명령(`/deploy`)으로 한다. 배포 커밋 메시지에 소스 커밋 해시를 남긴다 | 사용자가 명령으로 실행하길 원함. 배포 저장소가 소스와 분리돼 있어 어떤 소스가 배포됐는지 추적하기 위함 |
+| 2026-11-03 | 홈의 회색 섹션(대표 프로젝트, 그 외 활동) 배경을 `#f9fafb` → `#f3f4f6` (`SectionBackground`) 으로 진하게. 푸터·폰 목업·프로젝트 화면의 `SurfaceAlt` 는 그대로 | 사용자 요청: 흰 섹션과 차이가 잘 느껴지지 않음. 태그 배경과 같은 값이지만 태그는 흰 카드 안에만 있어 겹치지 않음 |
+| 2026-11-03 | `webClickable` 의 손가락 커서에 `overrideDescendants = true` | 페이지가 `SelectionContainer` 안이라 링크·버튼 안 텍스트가 I-beam 커서를 내서 손가락 커서를 덮었음 |
+| 2026-11-03 | 자기소개·불티 하이라이트·지표를 사용자 제공 문구로 교체 (지표: 회원 1,900명, 티켓 2,500장, 거래액 1,100만원. 버전 지표 33개는 유지) | 사용자 요청 (프롬프트 #9, #11) |
+| 2026-11-03 | 그 외 활동 링크: 블로그 190 → Compose Navigation 내부 분석, 189 → Navigation과 이벤트 충돌, DroidKnights PR #311, Manifest Android Interview 이슈 #14. 링크가 없는 ViewModel 예외 처리 글·SnapshotFlow 오류 보고는 제거. 불티 하이라이트의 "Navigation 이벤트 동시 발생에 대한 방어 로직" 도 189 글로 연결 | 사용자 요청 (프롬프트 #13). 글 제목으로 매핑 |
 
 ---
 
