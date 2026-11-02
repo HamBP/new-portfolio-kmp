@@ -24,3 +24,11 @@ HanilKeyboard 프로젝트의 규칙을 가져왔다. (#2)
 ## #2 (2026-11-02) HanilKeyboard 의 Claude 설정 가져오기
 
 > C:\Users\algosketch\AndroidStudioProjects\HanilKeyboard 이 프로젝트의 클로드 설정을 이 프로젝트에도 가져와줘. 이건 kmp가 아니라 모바일 프로젝트이니까 적절하게 변경해서 가져오면 돼. 필요하다면 docs도 가져와.
+
+## #3 (2026-11-02) 1번 이슈 작업
+
+> 1번 이슈 작업해줘
+
+이슈 #1 "피그마에 있는 디자인을 가져온다." 본문 요약:
+- 순서: 디자인 시스템·테마 → 내비게이션(화면 전환) → 홈 화면 → 프로젝트 화면
+- 코드 구조: https://github.com/Nexters/Boolti 와 비슷하게, 싱글 모듈, MVVM 대신 MVI (Boolti PR #582 참고). 웹 특성에 맞게 일부 변경 가능.
